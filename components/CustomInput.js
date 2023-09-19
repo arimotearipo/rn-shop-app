@@ -8,6 +8,7 @@ export default function CustomInput({
 	placeholder = "",
 	keyboardType = "default",
 	rules = {},
+	secureTextEntry = false,
 }) {
 	return (
 		<Controller
@@ -34,6 +35,7 @@ export default function CustomInput({
 							value={value}
 							onChangeText={onChange}
 							onBlur={onBlur}
+							secureTextEntry={secureTextEntry}
 						/>
 					</View>
 					<View style={[{ marginBottom: style.marginBottom }]}>

@@ -3,6 +3,8 @@ import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
+	Login,
+	Signup,
 	HomePage,
 	ProductDetails,
 	Cart,
@@ -25,6 +27,8 @@ const App = () => {
 					screenOptions={{ headerShown: false }}
 				>
 					<Stack.Screen name="Home" component={HomePage} />
+					{/* <Stack.Screen name="Login" component={Login} /> */}
+					{/* <Stack.Screen name="Signup" component={Signup} /> */}
 					<Stack.Screen name="ProductDetails" component={ProductDetails} />
 					<Stack.Screen name="Cart" component={Cart} />
 					<Stack.Screen name="ShippingForm" component={ShippingForm} />

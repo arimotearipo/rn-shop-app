@@ -3,7 +3,7 @@ import Info from "../components/Info";
 import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
 import { useNavigation } from "@react-navigation/native";
 import formatCardNumber from "../utils/formatCardNumber";
-import { Rating, AirbnbRating } from "react-native-ratings";
+import { AirbnbRating } from "react-native-ratings";
 import { DEFAULT_SHIPPING, DEFAULT_PAYMENT } from "../utils/constants";
 
 export default function OrderConfirmation({ route }) {

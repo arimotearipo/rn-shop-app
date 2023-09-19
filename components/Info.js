@@ -21,5 +21,6 @@ const styles = StyleSheet.create({
 	},
 	descriptionText: {
 		fontSize: 16,
+		color: "#97979c",
 	},
 });
