@@ -3,6 +3,7 @@ import Info from "../components/Info";
 import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
 import { useNavigation } from "@react-navigation/native";
 import formatCardNumber from "../utils/formatCardNumber";
+import { Rating, AirbnbRating } from "react-native-ratings";
 
 export default function OrderConfirmation({ route }) {
 	const { shippingData, paymentData, totalAmount, timestamp } = route.params;
@@ -52,10 +53,7 @@ export default function OrderConfirmation({ route }) {
 						title={"Email:"}
 						description={shippingData.email || "heisenberg@gmail.com"}
 					/>
-					<Info
-						title={"Shipping Address:"}
-						description={fullShippingAddress || "308, Negra Arroyo Lane"}
-					/>
+					<Info title={"Shipping Address:"} description={fullShippingAddress} />
 					<Info
 						title={"Payment Method:"}
 						description={paymentData.paymentMethod || "Debit Card/Credit Card"}
@@ -87,6 +85,20 @@ export default function OrderConfirmation({ route }) {
 					</View>
 				</View>
 
+				{/* Ratings */}
+				<View style={styles.ratingContainer}>
+					<Text style={styles.ratingLabel}>Please rate your experience</Text>
+					<AirbnbRating
+						count={5}
+						reviews={["Terrible", "Bad", "Meh", "Good", "Fantastic!"]}
+						defaultRating={5}
+						selectedColor="#15b32a"
+						reviewColor="#15b32a"
+						size={20}
+					/>
+				</View>
+
+				{/* Back to Shop button */}
 				<CustomTouchableOpacity
 					text={"Back to Shop"}
 					style={styles.backToShopButton}
@@ -136,6 +148,14 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		fontWeight: "bold",
 		color: "#2e3238",
+	},
+	ratingContainer: {
+		marginBottom: 40,
+		alignItems: "center",
+	},
+	ratingLabel: {
+		fontSize: 24,
+		fontWeight: "bold",
 	},
 	backToShopButton: {
 		margin: 10,
