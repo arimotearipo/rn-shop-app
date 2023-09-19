@@ -60,9 +60,10 @@ export default function ShippingForm({ route }) {
 					name={"email"}
 					style={styles.input}
 					placeholder={"Email"}
-					rules={{
-						pattern: { value: EMAIL_REGEX, message: "Email is invalid" },
-					}}
+					// rules={{
+					// 	required: "Email is required",
+					// 	pattern: { value: EMAIL_REGEX, message: "Email is invalid" },
+					// }}
 				/>
 
 				{/* Shipping Address input */}
@@ -101,7 +102,7 @@ export default function ShippingForm({ route }) {
 					labelStyle={styles.pickerlabelStyle}
 					label={"Please select your country:"}
 					selections={countriesSelection}
-					rules={{ required: "Please select a country" }}
+					// rules={{ required: "Please select a country" }}
 				/>
 
 				<CustomTouchableOpacity
@@ -116,6 +117,12 @@ export default function ShippingForm({ route }) {
 					text={"Pay"}
 					textStyle={styles.payButtonText}
 					disabled={Object.keys(errors).length != 0}
+				/>
+				<CustomTouchableOpacity
+					style={styles.goBackButton}
+					onPress={() => navigation.goBack()}
+					text={"Go Back"}
+					textStyle={styles.payButtonText}
 				/>
 			</View>
 		</ScrollView>
@@ -159,11 +166,22 @@ const styles = StyleSheet.create({
 	payButton: {
 		width: "40%",
 		height: 50,
+		marginBottom: 10,
 		borderWidth: 1,
 		borderRadius: 8,
 		borderColor: "black",
-		justifyContent: "center",
 		backgroundColor: "#71f0a8",
+		justifyContent: "center",
+	},
+	goBackButton: {
+		width: "40%",
+		height: 50,
+		marginBottom: 10,
+		borderRadius: 8,
+		borderWidth: 1,
+		borderColor: "black",
+		backgroundColor: "#f54248",
+		justifyContent: "center",
 	},
 	payButtonText: {
 		textAlign: "center",

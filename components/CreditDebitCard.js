@@ -1,6 +1,6 @@
 import CustomInput from "./CustomInput";
 import CustomPicker from "./CustomPicker";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 
 export default function CreditDebitCard({ control }) {
 	const cardSelections = [
@@ -18,7 +18,7 @@ export default function CreditDebitCard({ control }) {
 				labelStyle={styles.labelStyle}
 				label={"Please select service provider:"}
 				selections={cardSelections}
-				// rules={{ required: "Please select service provider" }}
+				rules={{ required: "Please select service provider" }}
 			/>
 
 			{/* Cardholder name */}
@@ -27,7 +27,7 @@ export default function CreditDebitCard({ control }) {
 				name={"cardholderName"}
 				style={styles.input}
 				placeholder={"Cardholder's Name"}
-				// rules={{ required: "Cardholder's name is required" }}
+				rules={{ required: "Cardholder's name is required" }}
 			/>
 
 			{/* Card number */}
@@ -36,7 +36,7 @@ export default function CreditDebitCard({ control }) {
 				name={"cardNumber"}
 				style={styles.input}
 				placeholder={"Card Number"}
-				// rules={{ required: "Card number is required" }}
+				rules={{ required: "Card number is required" }}
 				keyboardType={"numeric"}
 			/>
 
@@ -46,7 +46,7 @@ export default function CreditDebitCard({ control }) {
 				name={"securityCode"}
 				style={styles.input}
 				placeholder={"Security Code"}
-				// rules={{ required: "Security code is required" }}
+				rules={{ required: "Security code is required" }}
 				keyboardType={"numeric"}
 			/>
 
@@ -56,7 +56,7 @@ export default function CreditDebitCard({ control }) {
 				name={"expiryDate"}
 				style={styles.input}
 				placeholder={"Expiry Date"}
-				// rules={{ required: "Expiry date is required" }}
+				rules={{ required: "Expiry date is required" }}
 				keyboardType={"number-pad"}
 			/>
 		</View>
@@ -66,7 +66,7 @@ export default function CreditDebitCard({ control }) {
 const styles = StyleSheet.create({
 	container: {
 		width: "80%",
-		height: 320,
+		marginBottom: 20,
 	},
 	customPickerContainer: {
 		width: "100%",

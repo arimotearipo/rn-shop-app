@@ -7,16 +7,18 @@ import { useForm } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
 import RadioGroup from "react-native-radio-buttons-group";
 import { find } from "lodash";
+import { Controller } from "react-hook-form";
 
 export default function PaymentForm({ route }) {
 	const { totalAmount, shippingData } = route.params;
 
-	const [paymentMethod, setPaymentMethod] = useState();
+	const [paymentMethod, setPaymentMethod] = useState("1");
 
 	const {
 		control,
 		handleSubmit,
 		formState: { errors },
+		clearErrors,
 	} = useForm();
 
 	console.log("errors", errors);
@@ -48,6 +50,14 @@ export default function PaymentForm({ route }) {
 		});
 	}
 
+	function checkButtonDisabled() {
+		if (paymentMethod === "3") return false;
+
+		if (Object.keys(errors).length != 0) return true;
+
+		return false;
+	}
+
 	return (
 		<ScrollView style={{ flex: 1, backgroundColor: "#eae1eb" }}>
 			<View style={styles.container}>
@@ -70,7 +80,10 @@ export default function PaymentForm({ route }) {
 					<RadioGroup
 						containerStyle={styles.radioContainer}
 						radioButtons={paymentMethodSelections}
-						onPress={setPaymentMethod}
+						onPress={(id) => {
+							setPaymentMethod(id);
+							clearErrors();
+						}}
 						selectedId={paymentMethod}
 					/>
 				</View>
@@ -85,14 +98,19 @@ export default function PaymentForm({ route }) {
 					style={[
 						styles.placeOrderButton,
 						{
-							backgroundColor:
-								Object.keys(errors).length != 0 ? "#a9afc2" : "#71f0a8",
+							backgroundColor: checkButtonDisabled() ? "#a9afc2" : "#71f0a8",
 						},
 					]}
 					onPress={handleSubmit(handleCheckout)}
 					text={"Place Order"}
-					textStyle={styles.placeOrderButtonText}
-					disabled={Object.keys(errors).length != 0}
+					textStyle={styles.buttonText}
+					disabled={checkButtonDisabled()}
+				/>
+				<CustomTouchableOpacity
+					style={styles.goBackButton}
+					onPress={() => navigation.goBack()}
+					text={"Go Back"}
+					textStyle={styles.buttonText}
 				/>
 			</View>
 		</ScrollView>
@@ -124,13 +142,16 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		fontWeight: "bold",
 	},
-	paymentMethodContainer: {},
+	paymentMethodContainer: {
+		width: "80%",
+	},
 	paymentMethodLabel: {
 		fontWeight: "bold",
 		fontSize: 16,
 	},
 	radioContainer: {
 		alignItems: "flex-start",
+		marginBottom: 20,
 	},
 	input: {
 		width: "80%",
@@ -146,11 +167,21 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderRadius: 8,
 		borderColor: "black",
-		marginTop: 20,
-		justifyContent: "center",
+		marginBottom: 10,
 		backgroundColor: "#71f0a8",
+		justifyContent: "center",
 	},
-	placeOrderButtonText: {
+	goBackButton: {
+		width: "40%",
+		height: 50,
+		borderWidth: 1,
+		borderRadius: 8,
+		borderColor: "black",
+		marginBottom: 10,
+		backgroundColor: "#f54248",
+		justifyContent: "center",
+	},
+	buttonText: {
 		textAlign: "center",
 		fontWeight: "bold",
 		fontSize: 16,

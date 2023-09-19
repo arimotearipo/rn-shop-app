@@ -68,9 +68,11 @@ export default function OrderConfirmation({ route }) {
 							/>
 							<Info
 								title={"Card Number"}
-								description={formatCardNumber(
-									paymentData.cardNumber || "5310 7862 8182 2029"
-								)}
+								description={
+									`${paymentData.card}\n${formatCardNumber(
+										paymentData.cardNumber
+									)}` || "5310 7862 8182 2029"
+								}
 							/>
 						</>
 					)}
