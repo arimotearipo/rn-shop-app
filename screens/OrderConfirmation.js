@@ -4,6 +4,7 @@ import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
 import { useNavigation } from "@react-navigation/native";
 import formatCardNumber from "../utils/formatCardNumber";
 import { Rating, AirbnbRating } from "react-native-ratings";
+import { DEFAULT_SHIPPING, DEFAULT_PAYMENT } from "../utils/constants";
 
 export default function OrderConfirmation({ route }) {
 	const { shippingData, paymentData, totalAmount, timestamp } = route.params;
@@ -15,10 +16,10 @@ export default function OrderConfirmation({ route }) {
 	console.log(JSON.stringify(totalAmount, null, 2));
 
 	const fullShippingAddress = `${
-		shippingData.shippingAddress || "308, Negra Arroyo Lane"
-	}\n${shippingData.zipcode || "87111"} ${
-		shippingData.city || "Albuquerque"
-	}\n${shippingData.country || "USA"}`;
+		shippingData.shippingAddress || DEFAULT_SHIPPING.shippingAddress
+	}\n${shippingData.zipcode || DEFAULT_SHIPPING.zipcode} ${
+		shippingData.city || DEFAULT_SHIPPING.city
+	}\n${shippingData.country || DEFAULT_SHIPPING.country}`;
 
 	return (
 		<ScrollView
@@ -43,27 +44,29 @@ export default function OrderConfirmation({ route }) {
 					/>
 					<Info
 						title={"Name:"}
-						description={shippingData.name || "Walter Hartwell White"}
+						description={shippingData.name || DEFAULT_SHIPPING.name}
 					/>
 					<Info
 						title={"Phone Number:"}
-						description={shippingData.phoneNumber || "0123456789"}
+						description={
+							shippingData.phoneNumber || DEFAULT_SHIPPING.phoneNumber
+						}
 					/>
 					<Info
 						title={"Email:"}
-						description={shippingData.email || "heisenberg@gmail.com"}
+						description={shippingData.email || DEFAULT_SHIPPING.email}
 					/>
 					<Info title={"Shipping Address:"} description={fullShippingAddress} />
 					<Info
 						title={"Payment Method:"}
-						description={paymentData.paymentMethod || "Debit Card/Credit Card"}
+						description={paymentData.paymentMethod}
 					/>
 					{paymentData.paymentMethod === "Debit Card/Credit Card" && (
 						<>
 							<Info
 								title={"Cardholder's Name:"}
 								description={
-									paymentData.cardholderName || "Walter Hartwell White"
+									paymentData.cardholderName || DEFAULT_PAYMENT.cardholderName
 								}
 							/>
 							<Info
@@ -71,13 +74,16 @@ export default function OrderConfirmation({ route }) {
 								description={
 									`${paymentData.card}\n${formatCardNumber(
 										paymentData.cardNumber
-									)}` || "5310 7862 8182 2029"
+									)}` ||
+									`${DEFAULT_PAYMENT.card}\n${formatCardNumber(
+										DEFAULT_PAYMENT.cardNumber
+									)}`
 								}
 							/>
 						</>
 					)}
-					{paymentData.paymentMethod === "Online Banking:" && (
-						<Info title={"Bank"} description={paymentData.bank} />
+					{paymentData.paymentMethod === "Online Banking" && (
+						<Info title={"Bank:"} description={paymentData.bank} />
 					)}
 					<View style={styles.amountPaidContainer}>
 						<Text style={styles.amountPaidText}>Amount Paid:</Text>

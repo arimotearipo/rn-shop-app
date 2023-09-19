@@ -41,7 +41,7 @@ export default function ShippingForm({ route }) {
 					name={"name"}
 					style={styles.input}
 					placeholder={"Name"}
-					// rules={{ required: "Name is required" }}
+					rules={{ required: "Name is required" }}
 				/>
 
 				{/* Phone number input */}
@@ -50,7 +50,7 @@ export default function ShippingForm({ route }) {
 					name={"phoneNumber"}
 					style={styles.input}
 					placeholder={"Phone Number"}
-					// rules={{ required: "Phone number is required" }}
+					rules={{ required: "Phone number is required" }}
 					keyboardType={"phone-pad"}
 				/>
 
@@ -60,10 +60,10 @@ export default function ShippingForm({ route }) {
 					name={"email"}
 					style={styles.input}
 					placeholder={"Email"}
-					// rules={{
-					// 	required: "Email is required",
-					// 	pattern: { value: EMAIL_REGEX, message: "Email is invalid" },
-					// }}
+					rules={{
+						required: "Email is required",
+						pattern: { value: EMAIL_REGEX, message: "Email is invalid" },
+					}}
 				/>
 
 				{/* Shipping Address input */}
@@ -72,7 +72,7 @@ export default function ShippingForm({ route }) {
 					name={"shippingAddress"}
 					style={styles.input}
 					placeholder={"Shipping Address"}
-					// rules={{ required: "Shipping address is required" }}
+					rules={{ required: "Shipping address is required" }}
 				/>
 
 				{/* Zipcode */}
@@ -81,7 +81,7 @@ export default function ShippingForm({ route }) {
 					name={"zipcode"}
 					style={styles.input}
 					placeholder={"Zipcode"}
-					// rules={{ required: "Zipcode is required" }}
+					rules={{ required: "Zipcode is required" }}
 					keyboardType={"numeric"}
 				/>
 
@@ -91,7 +91,7 @@ export default function ShippingForm({ route }) {
 					name={"city"}
 					style={styles.input}
 					placeholder={"City"}
-					// rules={{ required: "City is required" }}
+					rules={{ required: "City is required" }}
 				/>
 
 				{/* Country picker */}
@@ -102,7 +102,7 @@ export default function ShippingForm({ route }) {
 					labelStyle={styles.pickerlabelStyle}
 					label={"Please select your country:"}
 					selections={countriesSelection}
-					// rules={{ required: "Please select a country" }}
+					rules={{ required: "Please select a country" }}
 				/>
 
 				<CustomTouchableOpacity

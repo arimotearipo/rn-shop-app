@@ -1,6 +1,6 @@
 import CustomInput from "./CustomInput";
 import CustomPicker from "./CustomPicker";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet } from "react-native";
 
 export default function CreditDebitCard({ control }) {
 	const cardSelections = [
