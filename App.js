@@ -1,20 +1,43 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { Provider } from "react-redux";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import {
+	HomePage,
+	ProductDetails,
+	Cart,
+	OrderConfirmation,
+	PaymentForm,
+	ShippingForm,
+} from "./screens";
+import store from "./store";
+import { SafeAreaView } from "react-native";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const Stack = createStackNavigator();
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const App = () => {
+	return (
+		// <SafeAreaView style={{ flex: 1 }}>
+		<Provider store={store}>
+			<NavigationContainer>
+				<Stack.Navigator
+					initialRouteName="Home"
+					screenOptions={{ headerShown: false }}
+				>
+					<Stack.Screen name="Home" component={HomePage} />
+					<Stack.Screen name="ProductDetails" component={ProductDetails} />
+					<Stack.Screen name="Cart" component={Cart} />
+					<Stack.Screen name="ShippingForm" component={ShippingForm} />
+					<Stack.Screen name="PaymentForm" component={PaymentForm} />
+					<Stack.Screen
+						name="OrderConfirmation"
+						component={OrderConfirmation}
+					/>
+				</Stack.Navigator>
+			</NavigationContainer>
+		</Provider>
+		// </SafeAreaView>
+	);
+};
+
+export default App;

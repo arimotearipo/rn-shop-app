@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "my-app",
-    "slug": "my-app",
+    "name": "RN Shop App",
+    "slug": "rn-shop-app",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
