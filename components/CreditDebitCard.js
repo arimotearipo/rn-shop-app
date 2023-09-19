@@ -71,7 +71,9 @@ const styles = StyleSheet.create({
 	customPickerContainer: {
 		width: "100%",
 		borderWidth: 1,
+		borderRadius: 8,
 		marginBottom: 10,
+		backgroundColor: "#f0f0ff",
 	},
 	labelStyle: {
 		fontSize: 16,
@@ -83,7 +85,8 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 		borderWidth: 1,
 		borderColor: "black",
-		borderRadius: 2,
+		borderRadius: 8,
 		padding: 8,
+		backgroundColor: "#f0f0ff",
 	},
 });

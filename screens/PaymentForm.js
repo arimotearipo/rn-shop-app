@@ -26,13 +26,21 @@ export default function PaymentForm({ route }) {
 	const navigation = useNavigation();
 
 	const paymentMethodSelections = [
-		{ id: "1", label: "Online Banking", value: "Online Banking" },
+		{
+			id: "1",
+			label: "Online Banking",
+			value: "Online Banking",
+		},
 		{
 			id: "2",
 			label: "Debit Card/Credit Card",
 			value: "Debit Card/Credit Card",
 		},
-		{ id: "3", label: "Cash on Delivery", value: "Cash on Delivery" },
+		{
+			id: "3",
+			label: "Cash on Delivery",
+			value: "Cash on Delivery",
+		},
 	];
 
 	function handleCheckout(paymentData) {

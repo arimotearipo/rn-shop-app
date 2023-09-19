@@ -23,12 +23,12 @@ const App = () => {
 		<Provider store={store}>
 			<NavigationContainer>
 				<Stack.Navigator
-					initialRouteName="Home"
+					initialRouteName="Signup"
 					screenOptions={{ headerShown: false }}
 				>
 					<Stack.Screen name="Home" component={HomePage} />
-					{/* <Stack.Screen name="Login" component={Login} /> */}
-					{/* <Stack.Screen name="Signup" component={Signup} /> */}
+					<Stack.Screen name="Login" component={Login} />
+					<Stack.Screen name="Signup" component={Signup} />
 					<Stack.Screen name="ProductDetails" component={ProductDetails} />
 					<Stack.Screen name="Cart" component={Cart} />
 					<Stack.Screen name="ShippingForm" component={ShippingForm} />

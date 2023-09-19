@@ -150,12 +150,10 @@ const styles = StyleSheet.create({
 		// borderWidth: 1,
 		borderRadius: 10,
 		padding: 10,
-		backgroundColor: "#b2bed1",
 	},
 	amountPaidText: {
-		fontSize: 20,
+		fontSize: 22,
 		fontWeight: "bold",
-		color: "#2e3238",
 	},
 	ratingContainer: {
 		marginBottom: 40,

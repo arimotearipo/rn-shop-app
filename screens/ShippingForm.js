@@ -150,14 +150,17 @@ const styles = StyleSheet.create({
 		height: 50,
 		marginBottom: 10,
 		borderWidth: 1,
-		borderRadius: 2,
+		borderRadius: 8,
 		borderColor: "black",
+		backgroundColor: "#f0f0ff",
 		padding: 8,
 	},
 	pickerContainer: {
 		width: "80%",
 		borderWidth: 1,
+		borderRadius: 8,
 		marginBottom: 10,
+		backgroundColor: "#f0f0ff",
 	},
 	pickerlabelStyle: {
 		fontSize: 16,
