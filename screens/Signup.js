@@ -3,6 +3,7 @@ import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
 import CustomInput from "../components/CustomInput";
 import { useForm } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
+import { LOGIN_ACCOUNTS } from "../utils/accounts";
 
 export default function Signup() {
 	const {
@@ -12,12 +13,18 @@ export default function Signup() {
 	} = useForm();
 	const navigation = useNavigation();
 
-	function validateIfPasswordsMatch(password, confirmPassword) {
+	function validateIfPasswordsMatch({ password, confirmPassword }) {
 		return password === confirmPassword || "Passwords do not match";
 	}
 
+	// Mock account registration
 	function handleSignup(data) {
-		console.log("Signing up");
+		LOGIN_ACCOUNTS.push({
+			username: data.username,
+			password: data.password,
+		});
+
+		navigation.navigate("Login");
 	}
 
 	return (
@@ -78,7 +85,7 @@ export default function Signup() {
 			/>
 			<CustomTouchableOpacity
 				style={styles.loginButton}
-				text={"Login"}
+				text={"Go to Login"}
 				textStyle={styles.buttonText}
 				onPress={() => navigation.navigate("Login")}
 			/>

@@ -3,6 +3,8 @@ import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
 import { View, StyleSheet, Text } from "react-native";
 import { useForm } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
+import { findIndex } from "lodash";
+import { LOGIN_ACCOUNTS } from "../utils/accounts";
 
 export default function Login() {
 	const {
@@ -12,8 +14,22 @@ export default function Login() {
 	} = useForm();
 	const navigation = useNavigation();
 
+	console.log("formErrors", errors);
+
+	// Mock authentication
+	function authenticate(username, password) {
+		const accIndex = findIndex(LOGIN_ACCOUNTS, ["username", username]);
+		if (accIndex != -1 && LOGIN_ACCOUNTS[accIndex].password === password) {
+			return true;
+		}
+		console.error("Username or password is incorrect");
+		return false;
+	}
+
 	function handleLogin(data) {
-		console.log("Logging in");
+		if (authenticate(data.username, data.password)) {
+			navigation.navigate("Home");
+		}
 	}
 
 	return (
@@ -36,10 +52,6 @@ export default function Login() {
 					placeholder="Password"
 					rules={{
 						required: "Password is required",
-						minLength: {
-							value: 6,
-							message: "Password needs to be at least 6 characters",
-						},
 					}}
 					secureTextEntry={true}
 				/>
@@ -59,7 +71,7 @@ export default function Login() {
 			/>
 			<CustomTouchableOpacity
 				style={styles.signupButton}
-				text={"Signup"}
+				text={"Go to Signup"}
 				textStyle={styles.buttonText}
 				onPress={() => navigation.navigate("Signup")}
 			/>

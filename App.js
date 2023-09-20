@@ -13,7 +13,6 @@ import {
 	ShippingForm,
 } from "./screens";
 import store from "./store";
-import { SafeAreaView } from "react-native";
 
 const Stack = createStackNavigator();
 
@@ -23,7 +22,7 @@ const App = () => {
 		<Provider store={store}>
 			<NavigationContainer>
 				<Stack.Navigator
-					initialRouteName="Signup"
+					initialRouteName="Login"
 					screenOptions={{ headerShown: false }}
 				>
 					<Stack.Screen name="Home" component={HomePage} />

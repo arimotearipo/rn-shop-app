@@ -10,6 +10,7 @@ import {
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import Product from "../components/Product";
+import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
 
 export default function HomePage() {
 	const products = useSelector((state) => state.productReducer.products);
@@ -22,13 +23,13 @@ export default function HomePage() {
 		navigation.navigate("ProductDetails", { product });
 	};
 
-	const handleSwipeRight = ({ nativeEvent }) => {
-		if (nativeEvent.state === 5) {
-			navigation.navigate("Cart", {
-				animation: "slide_from_right",
-			});
-		}
-	};
+	// const handleSwipeRight = ({ nativeEvent }) => {
+	// 	if (nativeEvent.state === 5) {
+	// 		navigation.navigate("Cart", {
+	// 			animation: "slide_from_right",
+	// 		});
+	// 	}
+	// };
 
 	const handleGoToCart = () => {
 		navigation.navigate("Cart");
@@ -36,17 +37,29 @@ export default function HomePage() {
 
 	return (
 		<View style={styles.container}>
+			{/* Header */}
 			<View style={styles.headerContainer}>
-				<View style={styles.titleContainer}>
-					<Text style={styles.titleText}>Product List</Text>
-				</View>
-				<TouchableOpacity
+				{/* Go to Cart button */}
+				<CustomTouchableOpacity
 					style={styles.goToCartButton}
 					onPress={() => handleGoToCart()}
-				>
-					<Text style={styles.goToCartText}>Go To Cart 🛒</Text>
-				</TouchableOpacity>
+					text={"Go To Cart 🛒"}
+					textStyle={styles.buttonText}
+				/>
+
+				{/* Logout button */}
+				<CustomTouchableOpacity
+					text={"Logout"}
+					onPress={() => navigation.navigate("Login")}
+					style={styles.logoutButton}
+					textStyle={styles.buttonText}
+				/>
 			</View>
+
+			<View style={styles.titleContainer}>
+				<Text style={styles.titleText}>Product List</Text>
+			</View>
+			{/* Flatlist */}
 			<View style={styles.flatListContainer}>
 				<FlatList
 					data={products}
@@ -78,6 +91,7 @@ const styles = StyleSheet.create({
 	},
 	titleContainer: {
 		padding: 10,
+		alignSelf: "center",
 	},
 	titleText: {
 		height: "auto",
@@ -85,6 +99,7 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 	},
 	flatListContainer: {
+		flex: 1,
 		justifyContent: "center",
 	},
 	goToCartButton: {
@@ -92,7 +107,12 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 		backgroundColor: "#7cd694",
 	},
-	goToCartText: {
+	logoutButton: {
+		padding: 10,
+		borderRadius: 10,
+		backgroundColor: "#61c0ff",
+	},
+	buttonText: {
 		fontWeight: "bold",
 		fontSize: 20,
 	},
