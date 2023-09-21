@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import formatCardNumber from "../utils/formatCardNumber";
 import { AirbnbRating } from "react-native-ratings";
 import { DEFAULT_SHIPPING, DEFAULT_PAYMENT } from "../utils/constants";
+import { numberInAccount } from "../utils/numberInAccount";
 
 export default function OrderConfirmation({ route }) {
 	const { shippingData, paymentData, totalAmount, timestamp } = route.params;
@@ -88,7 +89,7 @@ export default function OrderConfirmation({ route }) {
 					<View style={styles.amountPaidContainer}>
 						<Text style={styles.amountPaidText}>Amount Paid:</Text>
 						<Text style={styles.amountPaidText}>
-							{totalAmount.toFixed(2)} MYR
+							{numberInAccount(numbertotalAmount.toFixed(2))} MYR
 						</Text>
 					</View>
 				</View>

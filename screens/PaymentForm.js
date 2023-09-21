@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
 import RadioGroup from "react-native-radio-buttons-group";
 import { find } from "lodash";
-import { Controller } from "react-hook-form";
+import { numberInAccount } from "../utils/numberInAccount";
 
 export default function PaymentForm({ route }) {
 	const { totalAmount, shippingData } = route.params;
@@ -76,7 +76,7 @@ export default function PaymentForm({ route }) {
 				<View style={styles.totalAmountContainer}>
 					<Text style={styles.totalAmountText}>Amount to pay:</Text>
 					<Text style={styles.totalAmountText}>
-						{totalAmount.toFixed(2)} MYR
+						{numberInAccount(totalAmount.toFixed(2))} MYR
 					</Text>
 				</View>
 

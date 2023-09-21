@@ -1,4 +1,5 @@
 import { View, Text, Image, StyleSheet } from "react-native";
+import { numberInAccount } from "../utils/numberInAccount";
 
 export default function Product({ item, itemWidth }) {
 	return (
@@ -7,7 +8,9 @@ export default function Product({ item, itemWidth }) {
 				<Image source={require("../assets/cube.png")} style={styles.image} />
 			</View>
 			<Text style={styles.itemName}>{item.name}</Text>
-			<Text style={styles.itemPrice}>{item.price.toFixed(2)} MYR</Text>
+			<Text style={styles.itemPrice}>
+				{numberInAccount(item.price.toFixed(2))} MYR
+			</Text>
 		</View>
 	);
 }

@@ -5,6 +5,7 @@ import AddToCartModal from "../components/AddToCartModal";
 import { addToCart } from "../store/actions";
 import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
 import { useNavigation } from "@react-navigation/native";
+import { numberInAccount } from "../utils/numberInAccount";
 
 export default function ProductDetail({ route }) {
 	const { product } = route.params;
@@ -31,7 +32,7 @@ export default function ProductDetail({ route }) {
 				<Image source={require("../assets/cube.png")} style={styles.image} />
 				<Text style={styles.productNameText}>{product.name}</Text>
 				<Text style={styles.productPriceText}>
-					{product.price.toFixed(2)} MYR
+					{numberInAccount(product.price.toFixed(2))} MYR
 				</Text>
 				<Text style={styles.productDescriptionText}>{product.description}</Text>
 				<CustomTouchableOpacity

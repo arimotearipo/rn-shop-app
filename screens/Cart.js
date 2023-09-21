@@ -12,6 +12,8 @@ import CartProduct from "../components/CartProduct";
 import RemoveFromCartModal from "../components/RemoveFromCartModal";
 import EmptyCart from "../components/EmptyCart";
 import { removeFromCart } from "../store/actions";
+import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
+import { numberInAccount } from "../utils/numberInAccount";
 
 export default function Cart() {
 	const cartItems = useSelector((state) => state.cartReducer.items);
@@ -68,12 +70,29 @@ export default function Cart() {
 					)}
 				/>
 			</View>
-			<TouchableOpacity style={styles.checkoutButton} onPress={handleCheckout}>
-				<Text style={styles.checkoutButtonText}>Checkout 🛍️</Text>
-				<Text style={styles.totalAmountText}>
-					Total: {totalAmount.toFixed(2)} MYR
-				</Text>
-			</TouchableOpacity>
+
+			{/* Buttons container */}
+			<View style={styles.buttonsContainer}>
+				<CustomTouchableOpacity
+					text={"Go Back"}
+					style={styles.goBackButton}
+					onPress={() => navigation.goBack()}
+					textStyle={styles.buttonText}
+				/>
+
+				{/* Checkout button */}
+				<TouchableOpacity
+					style={styles.checkoutButton}
+					onPress={handleCheckout}
+				>
+					<Text style={styles.buttonText}>Checkout 🛍️</Text>
+					<Text style={styles.totalAmountText}>
+						Total: {numberInAccount(totalAmount.toFixed(2))} MYR
+					</Text>
+				</TouchableOpacity>
+			</View>
+
+			{/* Remove from cart modal*/}
 			{isModalVisible && (
 				<RemoveFromCartModal
 					isVisible={isModalVisible}
@@ -101,19 +120,38 @@ const styles = StyleSheet.create({
 		fontSize: 24,
 		fontWeight: "bold",
 	},
-	flatListContainer: {},
-	checkoutButton: {
-		height: "10%",
+	flatListContainer: {
+		flex: 1,
+		borderBottomWidth: 1,
+		borderBottomColor: "rgba(255, 0, 0, 0.1)",
+	},
+	buttonsContainer: {
+		height: 160,
+		justifyContent: "space-evenly",
+	},
+	goBackButton: {
+		margin: 10,
 		width: "80%",
+		justifyContent: "center",
+		alignSelf: "center",
+		height: 50,
+		borderRadius: 10,
+		borderWidth: 1,
+		borderColor: "black",
+		backgroundColor: "#f54248",
+	},
+	checkoutButton: {
+		width: "80%",
+		height: 80,
 		margin: 10,
 		justifyContent: "center",
 		alignSelf: "center",
-		borderWidth: 2,
+		borderWidth: 1,
 		borderColor: "black",
 		borderRadius: 5,
 		backgroundColor: "#71f0a8",
 	},
-	checkoutButtonText: {
+	buttonText: {
 		fontSize: 20,
 		fontWeight: "bold",
 		textAlign: "center",
