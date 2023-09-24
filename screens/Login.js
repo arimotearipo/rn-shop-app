@@ -3,8 +3,8 @@ import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
 import { View, StyleSheet, Text } from "react-native";
 import { useForm } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
-import { findIndex } from "lodash";
 import { LOGIN_ACCOUNTS } from "../utils/accounts";
+import { loginAPI } from "../service/login-service";
 
 export default function Login() {
 	const {
@@ -16,20 +16,15 @@ export default function Login() {
 
 	console.log("formErrors", errors);
 
-	// Mock authentication
-	function authenticate(username, password) {
-		const accIndex = findIndex(LOGIN_ACCOUNTS, ["username", username]);
-		if (accIndex != -1 && LOGIN_ACCOUNTS[accIndex].password === password) {
-			return true;
-		}
-		console.error("Username or password is incorrect");
-		return false;
-	}
-
-	function handleLogin(data) {
-		if (authenticate(data.username, data.password)) {
-			navigation.navigate("Home");
-		}
+	function handleLogin({ username, password }) {
+		loginAPI({ username, password })
+			.then((response) => {
+				console.log(`Logged in with username: ${response.data.username}`);
+				navigation.navigate("Home");
+			})
+			.catch((err) => {
+				console.error("client", err);
+			});
 	}
 
 	return (

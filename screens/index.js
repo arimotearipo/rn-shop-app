@@ -6,3 +6,4 @@ export { default as PaymentForm } from "./PaymentForm";
 export { default as ShippingForm } from "./ShippingForm";
 export { default as Login } from "./Login";
 export { default as Signup } from "./Signup";
+export { default as API } from "./API";

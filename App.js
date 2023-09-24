@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
+	API,
 	Login,
 	Signup,
 	HomePage,
@@ -25,6 +26,7 @@ const App = () => {
 					initialRouteName="Login"
 					screenOptions={{ headerShown: false }}
 				>
+					{/* <Stack.Screen name="API" component={API} /> */}
 					<Stack.Screen name="Home" component={HomePage} />
 					<Stack.Screen name="Login" component={Login} />
 					<Stack.Screen name="Signup" component={Signup} />

@@ -3,7 +3,7 @@ import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
 import CustomInput from "../components/CustomInput";
 import { useForm } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
-import { LOGIN_ACCOUNTS } from "../utils/accounts";
+import { signupAPI } from "../service";
 
 export default function Signup() {
 	const {
@@ -17,14 +17,21 @@ export default function Signup() {
 		return password === confirmPassword || "Passwords do not match";
 	}
 
-	// Mock account registration
 	function handleSignup(data) {
-		LOGIN_ACCOUNTS.push({
+		signupAPI({
+			fullname: data.fullname,
 			username: data.username,
 			password: data.password,
-		});
-
-		navigation.navigate("Login");
+		})
+			.then((response) => {
+				console.log("Signup success");
+				console.log(response);
+				navigation.navigate("Login");
+			})
+			.catch((err) => {
+				console.log("Signup failed");
+				console.error(err);
+			});
 	}
 
 	return (
@@ -35,7 +42,7 @@ export default function Signup() {
 			<View style={styles.inputContainer}>
 				<CustomInput
 					control={control}
-					name={"fullName"}
+					name={"fullname"}
 					style={styles.input}
 					placeholder={"Full Name"}
 					rules={{ required: "Full name is required" }}
