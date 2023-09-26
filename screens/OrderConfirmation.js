@@ -89,7 +89,7 @@ export default function OrderConfirmation({ route }) {
 					<View style={styles.amountPaidContainer}>
 						<Text style={styles.amountPaidText}>Amount Paid:</Text>
 						<Text style={styles.amountPaidText}>
-							{numberInAccount(numbertotalAmount.toFixed(2))} MYR
+							{numberInAccount(totalAmount.toFixed(2))} MYR
 						</Text>
 					</View>
 				</View>

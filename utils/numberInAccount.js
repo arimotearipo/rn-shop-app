@@ -1,4 +1,5 @@
 // Takes a string that represents a floating number (with decimal places)
+// and converts them into number formatted in accounting format (with commas)
 export function numberInAccount(number) {
 	const dotIndex = number.indexOf(".");
 
