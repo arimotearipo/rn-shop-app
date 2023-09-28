@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import {
 	View,
 	Text,
@@ -7,32 +7,32 @@ import {
 	StyleSheet,
 	useWindowDimensions,
 } from "react-native";
-import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import Product from "../components/Product";
 import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
+import { allProductsAPI } from "../service";
+import { useSelector } from "react-redux";
+import { printf } from "../utils";
 
 export default function HomePage() {
-	const products = useSelector((state) => state.productReducer.products);
+	const [products, setProducts] = useState([]);
 	const navigation = useNavigation();
 	const windowWidth = useWindowDimensions().width;
 	const numColumns = 3;
 	const itemWidth = windowWidth / numColumns - 4; // Deduct 4 because each item will have margin of 2 on each side
 
+	useEffect(() => {
+		allProductsAPI()
+			.then((response) => {
+				setProducts(response.data);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}, []);
+
 	const handleProductPress = (product) => {
 		navigation.navigate("ProductDetails", { product });
-	};
-
-	// const handleSwipeRight = ({ nativeEvent }) => {
-	// 	if (nativeEvent.state === 5) {
-	// 		navigation.navigate("Cart", {
-	// 			animation: "slide_from_right",
-	// 		});
-	// 	}
-	// };
-
-	const handleGoToCart = () => {
-		navigation.navigate("Cart");
 	};
 
 	return (
@@ -42,7 +42,7 @@ export default function HomePage() {
 				{/* Go to Cart button */}
 				<CustomTouchableOpacity
 					style={styles.goToCartButton}
-					onPress={() => handleGoToCart()}
+					onPress={() => navigation.navigate("Cart")}
 					text={"Go To Cart 🛒"}
 					textStyle={styles.buttonText}
 				/>
@@ -64,7 +64,7 @@ export default function HomePage() {
 				<FlatList
 					data={products}
 					numColumns={3}
-					keyExtractor={(item) => item.id.toString()}
+					keyExtractor={(item) => item._id}
 					renderItem={({ item }) => (
 						<TouchableOpacity onPress={() => handleProductPress(item)}>
 							<Product item={item} itemWidth={itemWidth} />

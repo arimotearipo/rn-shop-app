@@ -5,7 +5,9 @@ import {
 	Image,
 	useWindowDimensions,
 } from "react-native";
+import { useState, useEffect } from "react";
 import CustomTouchableOpacity from "./CustomTouchableOpacity";
+import { numberInAccount } from "../utils/";
 
 export default function CartProduct({ item, onGetItemDetails, onShowModal }) {
 	const { width: screenWidth, height: screenHeight } = useWindowDimensions();
@@ -23,11 +25,14 @@ export default function CartProduct({ item, onGetItemDetails, onShowModal }) {
 			<View style={styles.detailContainer}>
 				<View style={styles.itemDetailContainer}>
 					<Text style={styles.itemName}>{item.name}</Text>
-					<Text style={styles.itemPrice}>{(+item.price).toFixed(2)} MYR</Text>
+					<Text style={styles.itemPrice}>
+						{numberInAccount((+item.price).toFixed(2))} MYR
+					</Text>
 				</View>
-				<Text style={styles.itemQuantity}>Quantity: {item.qty}</Text>
+				<Text style={styles.itemQuantity}>Quantity: {item.quantity}</Text>
 				<Text style={styles.itemSubtotal}>
-					Subtotal: {(item.price * item.qty).toFixed(2)} MYR
+					Subtotal: {numberInAccount((item.price * item.quantity).toFixed(2))}{" "}
+					MYR
 				</Text>
 				{/* Remove button */}
 				<CustomTouchableOpacity

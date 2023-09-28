@@ -13,7 +13,7 @@ import {
 	PaymentForm,
 	ShippingForm,
 } from "./screens";
-import store from "./store";
+import store from "./rtk-store/store";
 
 const Stack = createStackNavigator();
 

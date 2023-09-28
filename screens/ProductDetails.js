@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import AddToCartModal from "../components/AddToCartModal";
-import { addToCart } from "../store/actions";
+import { addToCart } from "../rtk-store/slices/cartSlice";
 import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
 import { useNavigation } from "@react-navigation/native";
 import { numberInAccount } from "../utils/numberInAccount";
@@ -12,12 +12,12 @@ export default function ProductDetail({ route }) {
 	const [isModalVisible, setIsModalVisible] = useState(false);
 	const dispatch = useDispatch();
 	const navigation = useNavigation();
-	const cartItems = useSelector((state) => state.cartReducer.items);
+	const cartItems = useSelector((state) => state.cart.items);
 
 	const handleAddToCart = (quantity) => {
 		dispatch(
 			addToCart({
-				id: product.id,
+				id: product._id,
 				price: product.price,
 				name: product.name,
 				qty: quantity,

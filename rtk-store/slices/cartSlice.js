@@ -1,29 +1,31 @@
+import { createSlice } from "@reduxjs/toolkit";
 import { findIndex, remove } from "lodash";
-import * as types from "../actions/types";
 
 const initialState = {
 	items: [],
 };
 
-const cartReducer = (state = initialState, action) => {
-	switch (action.type) {
-		case types.ADD_TO_CART:
+const cartSlice = createSlice({
+	name: "cart",
+	initialState,
+	reducers: {
+		initializeCart: (state, action) => {
+			state.items = action.payload;
+		},
+		addToCart: (state, action) => {
 			const indexToAdd = findIndex(state.items, ["id", action.payload.id]);
 
+			// If item is already existing
 			if (indexToAdd != -1) {
 				const updatedItems = [...state.items];
 				updatedItems[indexToAdd].qty += action.payload.qty;
 
-				return {
-					...state,
-					items: updatedItems,
-				};
+				state.items = updatedItems;
+			} else {
+				state.items = [...state.items, action.payload];
 			}
-			return {
-				...state,
-				items: [...state.items, action.payload],
-			};
-		case types.REMOVE_FROM_CART:
+		},
+		removeFromCart: (state, action) => {
 			const indexToRemove = findIndex(state.items, ["id", action.payload.id]);
 
 			const updatedItems = [...state.items];
@@ -34,13 +36,11 @@ const cartReducer = (state = initialState, action) => {
 				updatedItems[indexToRemove].qty -= action.payload.qty;
 			}
 
-			return {
-				...state,
-				items: updatedItems,
-			};
-		default:
-			return state;
-	}
-};
+			state.items = updatedItems;
+		},
+	},
+});
 
-export default cartReducer;
+const { actions, reducer } = cartSlice;
+export const { initializeCart, addToCart, removeFromCart } = actions;
+export { reducer };

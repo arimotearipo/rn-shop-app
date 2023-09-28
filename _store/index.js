@@ -1,3 +1,7 @@
+/**
+ * Deprecated as we're currently using redux toolkit
+ */
+
 import { legacy_createStore as createStore, combineReducers } from "redux";
 import rootReducer from "./reducers";
 

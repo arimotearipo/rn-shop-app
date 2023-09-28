@@ -3,8 +3,9 @@ import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
 import { View, StyleSheet, Text } from "react-native";
 import { useForm } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
-import { LOGIN_ACCOUNTS } from "../utils/accounts";
 import { loginAPI } from "../service/login-service";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../rtk-store/slices/userSlice";
 
 export default function Login() {
 	const {
@@ -13,13 +14,22 @@ export default function Login() {
 		formState: { errors },
 	} = useForm();
 	const navigation = useNavigation();
+	const dispatch = useDispatch();
 
 	console.log("formErrors", errors);
 
 	function handleLogin({ username, password }) {
 		loginAPI({ username, password })
 			.then((response) => {
-				console.log(`Logged in with username: ${response.data.username}`);
+				console.log(
+					`Logged in\nusername: ${response.data.username}\nid: ${response.data._id}`
+				);
+				dispatch(
+					loginUser({
+						username: response.data.username,
+						userId: response.data._id,
+					})
+				);
 				navigation.navigate("Home");
 			})
 			.catch((err) => {

@@ -6,34 +6,43 @@ import {
 	FlatList,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import CartProduct from "../components/CartProduct";
 import RemoveFromCartModal from "../components/RemoveFromCartModal";
 import EmptyCart from "../components/EmptyCart";
-import { removeFromCart } from "../store/actions";
+import { removeFromCart, initializeCart } from "../rtk-store/slices/cartSlice";
 import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
-import { numberInAccount } from "../utils/numberInAccount";
+import { numberInAccount } from "../utils/";
+import { getCartAPI } from "../service";
 
 export default function Cart() {
-	const cartItems = useSelector((state) => state.cartReducer.items);
-	const dispatch = useDispatch();
+	const cartItems = useSelector((state) => state.cart.items);
+	const userId = useSelector((state) => state.user.userId);
+
 	const [itemToRemove, setItemToRemove] = useState({});
 	const [isModalVisible, setIsModalVisible] = useState(false);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		getCartAPI(userId)
+			.then((response) => {
+				dispatch(initializeCart(response.data));
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}, []);
 
 	const totalAmount = cartItems.reduce(
-		(total, item) => total + item.price * item.qty,
+		(total, item) => total + item.price * item.quantity,
 		0
 	);
 
 	const navigation = useNavigation();
 
 	function handleCheckout() {
-		const name = "hello world";
-		navigation.navigate("ShippingForm", {
-			totalAmount,
-			name,
-		});
+		navigation.navigate("ShippingForm", { totalAmount });
 	}
 
 	function handleRemoveFromCart(quantity) {
@@ -60,7 +69,7 @@ export default function Cart() {
 				</View>
 				<FlatList
 					data={cartItems}
-					keyExtractor={(item) => item.id.toString()}
+					keyExtractor={(item) => item._id.toString()}
 					renderItem={({ item }) => (
 						<CartProduct
 							item={item}
