@@ -36,9 +36,9 @@ export default function CartProduct({ item, onGetItemDetails, onShowModal }) {
 				</Text>
 				{/* Remove button */}
 				<CustomTouchableOpacity
-					style={styles.removeButton}
-					text={"Remove"}
-					textStyle={styles.removeButtonText}
+					style={styles.updateQuantityButton}
+					text={"Revise Quantity"}
+					textStyle={styles.updateQuantityText}
 					onPress={handleRemoveButton}
 				/>
 			</View>
@@ -84,9 +84,9 @@ const styles = StyleSheet.create({
 		fontSize: 14,
 		fontWeight: "bold",
 	},
-	removeButton: {
+	updateQuantityButton: {
 		height: "30%",
-		width: "50%",
+		width: "60%",
 		borderRadius: 12,
 		borderWidth: 1,
 		borderColor: "black",
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
 		alignSelf: "center",
 		marginVertical: 2,
 	},
-	removeButtonText: {
+	updateQuantityText: {
 		textAlign: "center",
 		verticalAlign: "middle",
 	},

@@ -13,13 +13,13 @@ const cartSlice = createSlice({
 		loadCart: (state, action) => {
 			state.items = action.payload;
 		},
-		addToCart: (state, action) => {
-			const indexToAdd = findIndex(state.items, ["_id", action.payload._id]);
+		updateCart: (state, action) => {
+			const indexToUpdate = findIndex(state.items, ["_id", action.payload._id]);
 
 			// If item is already existing
-			if (indexToAdd != -1) {
+			if (indexToUpdate != -1) {
 				const updatedItems = [...state.items];
-				updatedItems[indexToAdd].quantity += action.payload.quantity;
+				updatedItems[indexToUpdate].quantity = action.payload.quantity;
 
 				state.items = updatedItems;
 			} else {
@@ -44,5 +44,5 @@ const cartSlice = createSlice({
 });
 
 const { actions, reducer } = cartSlice;
-export const { loadCart, addToCart, removeFromCart } = actions;
+export const { loadCart, updateCart, removeFromCart } = actions;
 export { reducer };

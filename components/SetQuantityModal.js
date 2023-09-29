@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import CustomTouchableOpacity from "./CustomTouchableOpacity";
 import {
 	View,
 	Text,
@@ -7,21 +7,37 @@ import {
 	StyleSheet,
 	ScrollView,
 } from "react-native";
-import CustomTouchableOpacity from "./CustomTouchableOpacity";
-import { isNumeric } from "../utils";
+import { useState } from "react";
+import { isNumeric, printf } from "../utils";
+import { useDispatch } from "react-redux";
+import { updateCartAction, removeFromCartAction } from "../rtk-store/actions";
 
-export default function RemoveFromCartModal({
+export default function SetQuantityModal({
 	isVisible,
 	onClose,
-	onRemoveFromCart,
-	currentQuantity,
+	product,
+	quantityInCart = "1",
+	isAddToCart = false,
 }) {
-	const [quantity, setQuantity] = useState(currentQuantity.toString());
+	printf("product", product);
+	const [quantity, setQuantity] = useState(quantityInCart.toString());
 	const [inputError, setInputError] = useState(false);
+
+	const dispatch = useDispatch();
+
+	// To check for error when user adjusts the value inside the text input
+	// If the value is invalid, the `Add to Cart` button will be disabled
+	// Value is invalid if it is not a number or if it is less than one
+	function checkInputError(numberText) {
+		if (!isNumeric(numberText) || +numberText < 1) {
+			setInputError(true);
+		} else {
+			setInputError(false);
+		}
+	}
 
 	// When user clicks the + button
 	function handleIncrement() {
-		if (+quantity >= currentQuantity) return; // Cannot remove quantity more than the current quantity in cart
 		setQuantity((prev) => {
 			checkInputError((+prev + 1).toString());
 			return (+prev + 1).toString();
@@ -30,29 +46,11 @@ export default function RemoveFromCartModal({
 
 	// When user clicks the - button
 	function handleDecrement() {
-		if (+quantity <= 1) return;
+		if (+quantity <= 0) return; // Minimum is 0
 		setQuantity((prev) => {
-			checkInputError((+prev - 1).toString());
+			checkInputError((+prev + 1).toString());
 			return (+prev - 1).toString();
 		});
-	}
-
-	function handleRemoveFromCart() {
-		const quantityInt = parseInt(quantity, 10);
-		if (quantityInt > 0) {
-			onRemoveFromCart(quantityInt);
-			onClose();
-		}
-	}
-
-	// Check for invalid values when user manually keys in the value inside the text input
-	// If it is invalid, the 'Remove from Cart' button will be disabled
-	function checkInputError(numberText) {
-		if (!isNumeric(numberText) || +numberText > currentQuantity) {
-			setInputError(true);
-		} else {
-			setInputError(false);
-		}
 	}
 
 	// When user manually keys in the value inside the text input
@@ -61,10 +59,47 @@ export default function RemoveFromCartModal({
 		setQuantity(text);
 	}
 
-	// When user clicks "Remove All"
-	function handleRemoveAll() {
-		setQuantity(currentQuantity.toString());
-		handleRemoveFromCart();
+	async function handleUpdateQuantity() {
+		if (+quantity === 0) {
+			handleRemoveAll();
+			return;
+		}
+
+		try {
+			await dispatch(
+				updateCartAction({
+					_id: product._id,
+					name: product.name,
+					price: product.price,
+					description: product.description,
+					quantity: +quantity,
+				})
+			);
+
+			console.log(`Added ${quantity} ${product.name}(s) to cart.`);
+			onClose();
+		} catch (error) {
+			console.error(error);
+		}
+	}
+
+	async function handleRemoveAll() {
+		try {
+			dispatch(
+				removeFromCartAction({
+					_id: product._id,
+					name: product.name,
+					price: product.price,
+					description: product.description,
+					quantity: +quantity,
+				})
+			);
+
+			console.log(`Removed ${product.name} from cart.`);
+			onClose();
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
 	return (
@@ -81,17 +116,16 @@ export default function RemoveFromCartModal({
 				<View style={styles.modalContainer}>
 					<View style={styles.modalContent}>
 						<Text style={styles.modalHeader}>Select Quantity</Text>
-
-						{/* Input container */}
 						<View style={styles.inputContainer}>
-							{/* Deduct button */}
+							{/* - button */}
 							<CustomTouchableOpacity
 								style={styles.varyQuantityButton}
 								onPress={handleDecrement}
 								text={"-"}
 								textStyle={styles.varyQuantityText}
 							/>
-							{/* Number input form */}
+
+							{/* Quantity input */}
 							<TextInput
 								style={styles.input}
 								placeholder="Quantity"
@@ -100,7 +134,8 @@ export default function RemoveFromCartModal({
 								onChangeText={(text) => handleInputChange(text)}
 								error={inputError}
 							/>
-							{/* Add button */}
+
+							{/* + button */}
 							<CustomTouchableOpacity
 								style={styles.varyQuantityButton}
 								onPress={handleIncrement}
@@ -109,33 +144,33 @@ export default function RemoveFromCartModal({
 							/>
 						</View>
 
-						{/* Input error message */}
+						{/* Error message if value is invalid */}
 						<View style={styles.inputErrorContainer}>
 							<Text style={styles.inputError}>
-								{inputError == true &&
-									`Quantity must be between 1 and ${currentQuantity}`}
+								{inputError == true && "Quantity must be at least 1"}
 							</Text>
 						</View>
 
-						{/* Remove From Cart button */}
+						{/* Button to update/confirm new value */}
 						<CustomTouchableOpacity
 							style={[
 								styles.buttons,
 								{ backgroundColor: inputError ? "#a9afc2" : "#5784ff" },
 							]}
-							onPress={handleRemoveFromCart}
+							onPress={handleUpdateQuantity}
 							disabled={inputError}
-							text={"Remove from Cart"}
+							text={isAddToCart ? "Add to Cart" : "Update Quantity"}
 							textStyle={styles.buttonsText}
 						/>
 
-						{/* Remove All button */}
-						<CustomTouchableOpacity
-							style={[styles.buttons, { backgroundColor: "#eb7f05" }]}
-							text={"Remove All"}
-							textStyle={styles.buttonsText}
-							onPress={handleRemoveAll}
-						/>
+						{isAddToCart == false && (
+							<CustomTouchableOpacity
+								style={[styles.buttons, { backgroundColor: "#eb7f05" }]}
+								onPress={handleRemoveAll}
+								text={"Remove All"}
+								textStyle={styles.buttonsText}
+							/>
+						)}
 
 						{/* Cancel button */}
 						<CustomTouchableOpacity
@@ -166,7 +201,7 @@ const styles = StyleSheet.create({
 		width: "70%",
 		height: 300,
 		alignItems: "center",
-		justifyContent: "space-evenly",
+		justifyContent: "center",
 	},
 	modalHeader: {
 		fontSize: 32,
@@ -199,7 +234,6 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 		borderWidth: 1,
 		borderRadius: 8,
-		padding: 8,
 		textAlign: "center",
 		fontSize: 16,
 	},
@@ -212,16 +246,16 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 	},
 	buttons: {
-		width: "70%",
+		width: "50%",
 		height: 50,
 		marginBottom: 10,
 		borderWidth: 1,
 		borderColor: "black",
 		borderRadius: 10,
 		justifyContent: "center",
-		alignItems: "center",
 	},
 	buttonsText: {
+		textAlign: "center",
 		fontWeight: "bold",
 		fontSize: 18,
 	},
