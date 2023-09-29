@@ -1,11 +1,10 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import Info from "../components/Info";
-import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
+import { Info } from "../components";
+import { CustomTouchableOpacity } from "../components/customized-components/";
 import { useNavigation } from "@react-navigation/native";
-import formatCardNumber from "../utils/formatCardNumber";
 import { AirbnbRating } from "react-native-ratings";
 import { DEFAULT_SHIPPING, DEFAULT_PAYMENT } from "../utils/constants";
-import { numberInAccount } from "../utils/numberInAccount";
+import { numberInAccount, formatCardNumber } from "../utils/";
 
 export default function OrderConfirmation({ route }) {
 	const { shippingData, paymentData, totalAmount, timestamp } = route.params;

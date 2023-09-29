@@ -1,13 +1,12 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { useState } from "react";
-import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
-import OnlineBanking from "../components/OnlineBanking";
-import CreditDebitCard from "../components/CreditDebitCard";
+import { CustomTouchableOpacity } from "../components/customized-components/";
+import { OnlineBanking, CreditDebitCard } from "../components/";
 import { useForm } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
 import RadioGroup from "react-native-radio-buttons-group";
 import { find } from "lodash";
-import { numberInAccount } from "../utils/numberInAccount";
+import { numberInAccount } from "../utils/";
 
 export default function PaymentForm({ route }) {
 	const { totalAmount, shippingData } = route.params;

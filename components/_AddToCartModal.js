@@ -13,7 +13,7 @@ import {
 	StyleSheet,
 	ScrollView,
 } from "react-native";
-import CustomTouchableOpacity from "./CustomTouchableOpacity";
+import { CustomTouchableOpacity } from "./customized-components/";
 import { addToCartAction } from "../rtk-store/actions";
 import { isNumeric } from "../utils";
 import { useDispatch } from "react-redux";

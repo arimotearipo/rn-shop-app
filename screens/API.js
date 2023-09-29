@@ -1,5 +1,5 @@
 import { View, Text, Button } from "react-native";
-import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
+import { CustomTouchableOpacity } from "../components/customized-components/";
 import axios from "axios";
 import { TextInput } from "react-native-gesture-handler";
 import { useState } from "react";

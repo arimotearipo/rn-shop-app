@@ -8,11 +8,9 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import CartProduct from "../components/CartProduct";
-import SetQuantityModal from "../components/SetQuantityModal";
-import EmptyCart from "../components/EmptyCart";
+import { CartProduct, SetQuantityModal, EmptyCart } from "../components/";
 import { removeFromCart } from "../rtk-store/slices/cartSlice";
-import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
+import { CustomTouchableOpacity } from "../components/customized-components/";
 import { numberInAccount } from "../utils/";
 
 export default function Cart() {

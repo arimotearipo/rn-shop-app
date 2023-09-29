@@ -1,8 +1,10 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { useForm } from "react-hook-form";
-import CustomInput from "../components/CustomInput";
-import CustomPicker from "../components/CustomPicker";
-import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
+import {
+	CustomTouchableOpacity,
+	CustomInput,
+	CustomPicker,
+} from "../components/customized-components/";
 import { useNavigation } from "@react-navigation/native";
 import { EMAIL_REGEX } from "../utils/constants";
 

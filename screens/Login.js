@@ -1,5 +1,7 @@
-import CustomInput from "../components/CustomInput";
-import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
+import {
+	CustomTouchableOpacity,
+	CustomInput,
+} from "../components/customized-components/";
 import { View, StyleSheet, Text } from "react-native";
 import { useForm } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";

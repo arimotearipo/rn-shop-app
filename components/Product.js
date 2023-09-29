@@ -1,7 +1,7 @@
 import { View, Text, Image, StyleSheet } from "react-native";
-import { numberInAccount } from "../utils/numberInAccount";
+import { numberInAccount } from "../utils";
 
-export default function Product({ item, itemWidth }) {
+export function Product({ item, itemWidth }) {
 	return (
 		<View style={[styles.container, { width: itemWidth }]}>
 			<View style={styles.imageContainer}>

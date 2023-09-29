@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet } from "react-native";
 
-export default function Info({ title, description }) {
+export function Info({ title, description }) {
 	return (
 		<View style={styles.container}>
 			<Text style={styles.titleText}>{title}</Text>

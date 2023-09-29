@@ -1,4 +1,4 @@
-export default function formatCardNumber(numberText) {
+export function formatCardNumber(numberText) {
 	if (numberText < 8) return numberText;
 
 	const finalFourDigits = numberText.substring(

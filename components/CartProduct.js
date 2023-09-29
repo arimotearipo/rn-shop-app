@@ -5,11 +5,10 @@ import {
 	Image,
 	useWindowDimensions,
 } from "react-native";
-import { useState, useEffect } from "react";
-import CustomTouchableOpacity from "./CustomTouchableOpacity";
+import { CustomTouchableOpacity } from "./customized-components/";
 import { numberInAccount } from "../utils/";
 
-export default function CartProduct({ item, onGetItemDetails, onShowModal }) {
+export function CartProduct({ item, onGetItemDetails, onShowModal }) {
 	const { width: screenWidth, height: screenHeight } = useWindowDimensions();
 	const itemWidth = screenWidth * 0.8;
 	const itemHeight = screenHeight / 6 - 10;

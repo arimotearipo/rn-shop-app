@@ -8,8 +8,8 @@ import {
 	useWindowDimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import Product from "../components/Product";
-import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
+import { Product } from "../components/";
+import { CustomTouchableOpacity } from "../components/customized-components/";
 import { allProductsAPI } from "../services";
 
 export default function HomePage() {

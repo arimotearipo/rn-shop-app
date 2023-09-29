@@ -13,7 +13,7 @@ import {
 	StyleSheet,
 	ScrollView,
 } from "react-native";
-import CustomTouchableOpacity from "./CustomTouchableOpacity";
+import { CustomTouchableOpacity } from "./customized-components/";
 import { isNumeric } from "../utils";
 
 export default function RemoveFromCartModal({

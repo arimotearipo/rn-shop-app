@@ -1,7 +1,7 @@
 import { View, StyleSheet } from "react-native";
-import CustomPicker from "../components/CustomPicker";
+import { CustomPicker } from "../components/customized-components/";
 
-export default function OnlineBanking({ control }) {
+export function OnlineBanking({ control }) {
 	const banksSelection = [
 		{ label: "Hong Leong Bank", value: "Hong Leong Bank" },
 		{ label: "Maybank", value: "Maybank" },

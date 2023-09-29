@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { findIndex, remove } from "lodash";
-import { printf } from "../../utils";
 
 const initialState = {
 	items: [],

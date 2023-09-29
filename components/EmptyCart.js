@@ -1,8 +1,8 @@
 import { SafeAreaView, View, Text, StyleSheet } from "react-native";
-import CustomTouchableOpacity from "./CustomTouchableOpacity";
+import { CustomTouchableOpacity } from "./customized-components/";
 import { useNavigation } from "@react-navigation/native";
 
-export default function EmptyCart() {
+export function EmptyCart() {
 	const navigation = useNavigation();
 
 	return (

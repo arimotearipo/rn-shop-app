@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
-import SetQuantityModal from "../components/SetQuantityModal";
-import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
+import { SetQuantityModal } from "../components/";
+import { CustomTouchableOpacity } from "../components/customized-components/";
 import { useNavigation } from "@react-navigation/native";
-import { numberInAccount } from "../utils/numberInAccount";
+import { numberInAccount } from "../utils/";
 
 export default function ProductDetail({ route }) {
 	const { product } = route.params;

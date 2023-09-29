@@ -1,4 +1,4 @@
-import CustomTouchableOpacity from "./CustomTouchableOpacity";
+import { CustomTouchableOpacity } from "./customized-components";
 import {
 	View,
 	Text,
@@ -8,11 +8,11 @@ import {
 	ScrollView,
 } from "react-native";
 import { useState } from "react";
-import { isNumeric, printf } from "../utils";
+import { isNumeric } from "../utils";
 import { useDispatch } from "react-redux";
 import { updateCartAction, removeFromCartAction } from "../rtk-store/actions";
 
-export default function SetQuantityModal({
+export function SetQuantityModal({
 	isVisible,
 	onClose,
 	product,
