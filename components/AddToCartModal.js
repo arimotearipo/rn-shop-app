@@ -8,12 +8,35 @@ import {
 	ScrollView,
 } from "react-native";
 import CustomTouchableOpacity from "./CustomTouchableOpacity";
+import { addToCartAction } from "../rtk-store/actions";
 import { isNumeric } from "../utils";
+import { useDispatch } from "react-redux";
 
-export default function AddToCartModal({ isVisible, onClose, onAddToCart }) {
+export default function AddToCartModal({ isVisible, onClose, product }) {
 	const [quantity, setQuantity] = useState("1");
 	const [inputError, setInputError] = useState(false);
 
+	const dispatch = useDispatch();
+
+	// When user clicks the + button
+	function handleIncrement() {
+		setQuantity((prev) => {
+			checkInputError((+prev + 1).toString());
+			return (+prev + 1).toString();
+		});
+	}
+
+	// When user clicks the - button
+	function handleDecrement() {
+		if (+quantity <= 1) return; // Minimum is 1
+		setQuantity((prev) => {
+			checkInputError((+prev + 1).toString());
+			return (+prev - 1).toString();
+		});
+	}
+
+	// To check for error when user manually enters the value inside the text input
+	// If the value is invalid, the `Add to Cart` button will be disabled
 	function checkInputError(numberText) {
 		if (!isNumeric(numberText) || +numberText < 1) {
 			setInputError(true);
@@ -22,32 +45,29 @@ export default function AddToCartModal({ isVisible, onClose, onAddToCart }) {
 		}
 	}
 
-	function handleIncrement() {
-		setQuantity((prev) => {
-			checkInputError((+prev + 1).toString());
-			return (+prev + 1).toString();
-		});
-	}
-
-	function handleDecrement() {
-		if (+quantity <= 1) return;
-		setQuantity((prev) => {
-			checkInputError((+prev + 1).toString());
-			return (+prev - 1).toString();
-		});
-	}
-
-	function handleAddToCart() {
-		const quantityInt = parseInt(quantity, 10);
-		if (quantityInt > 0) {
-			onAddToCart(quantityInt);
-			onClose();
-		}
-	}
-
+	// When user manually keys in the value inside the text input
 	function handleInputChange(text) {
 		checkInputError(text);
 		setQuantity(text);
+	}
+
+	async function handleAddToCart() {
+		try {
+			await dispatch(
+				addToCartAction({
+					_id: product._id,
+					name: product.name,
+					price: product.price,
+					description: product.description,
+					quantity: +quantity,
+				})
+			);
+
+			console.log(`Added ${quantity} ${product.name}(s) to cart.`);
+			onClose();
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
 	return (

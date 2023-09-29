@@ -1,18 +1,14 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import AddToCartModal from "../components/AddToCartModal";
-import { addToCart } from "../rtk-store/slices/cartSlice";
 import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
 import { useNavigation } from "@react-navigation/native";
 import { numberInAccount } from "../utils/numberInAccount";
-import { printf } from "../utils";
-import { addToCartAction } from "../rtk-store/actions";
 
 export default function ProductDetail({ route }) {
 	const { product } = route.params;
 	const [isModalVisible, setIsModalVisible] = useState(false);
-	const dispatch = useDispatch();
 	const navigation = useNavigation();
 	const cartItems = useSelector((state) => state.cart.items);
 
@@ -29,23 +25,23 @@ export default function ProductDetail({ route }) {
 	// 	console.log(`Added ${quantity} ${product.name}(s) to cart.`);
 	// };
 
-	async function handleAddToCart(quantity) {
-		try {
-			await dispatch(
-				addToCartAction({
-					_id: product._id,
-					name: product.name,
-					price: product.price,
-					description: product.description,
-					quantity,
-				})
-			);
+	// async function handleAddToCart(quantity) {
+	// 	try {
+	// 		await dispatch(
+	// 			addToCartAction({
+	// 				_id: product._id,
+	// 				name: product.name,
+	// 				price: product.price,
+	// 				description: product.description,
+	// 				quantity,
+	// 			})
+	// 		);
 
-			console.log(`Added ${quantity} ${product.name}(s) to cart.`);
-		} catch (error) {
-			console.error(error);
-		}
-	}
+	// 		console.log(`Added ${quantity} ${product.name}(s) to cart.`);
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 	}
+	// }
 
 	return (
 		<ScrollView style={{ flex: 1, backgroundColor: "#eae1eb" }}>
@@ -79,7 +75,7 @@ export default function ProductDetail({ route }) {
 				<AddToCartModal
 					isVisible={isModalVisible}
 					onClose={() => setIsModalVisible(false)}
-					onAddToCart={handleAddToCart}
+					product={product}
 				/>
 			</View>
 		</ScrollView>
