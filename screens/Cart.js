@@ -5,11 +5,10 @@ import {
 	StyleSheet,
 	FlatList,
 } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { CartProduct, SetQuantityModal, EmptyCart } from "../components/";
-import { removeFromCart } from "../rtk-store/slices/cartSlice";
 import { CustomTouchableOpacity } from "../components/customized-components/";
 import { numberInAccount } from "../utils/";
 
@@ -18,8 +17,6 @@ export default function Cart() {
 
 	const [itemToRemove, setItemToRemove] = useState({});
 	const [isModalVisible, setIsModalVisible] = useState(false);
-
-	const dispatch = useDispatch();
 
 	const navigation = useNavigation();
 
@@ -30,16 +27,6 @@ export default function Cart() {
 
 	function handleCheckout() {
 		navigation.navigate("ShippingForm", { totalAmount });
-	}
-
-	function handleRemoveFromCart(quantity) {
-		dispatch(
-			removeFromCart({
-				_id: itemToRemove._id,
-				quantity,
-			})
-		);
-		console.log(`Removed ${quantity} ${itemToRemove.name}(s) from cart.`);
 	}
 
 	if (cartItems.length === 0) {

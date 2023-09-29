@@ -12,37 +12,6 @@ export default function ProductDetail({ route }) {
 	const navigation = useNavigation();
 	const cartItems = useSelector((state) => state.cart.items);
 
-	// const handleAddToCart = (quantity) => {
-	// 	dispatch(
-	// 		addToCart({
-	// 			_id: product._id,
-	// 			name: product.name,
-	// 			price: product.price,
-	// 			description: product.description,
-	// 			quantity,
-	// 		})
-	// 	);
-	// 	console.log(`Added ${quantity} ${product.name}(s) to cart.`);
-	// };
-
-	// async function handleAddToCart(quantity) {
-	// 	try {
-	// 		await dispatch(
-	// 			addToCartAction({
-	// 				_id: product._id,
-	// 				name: product.name,
-	// 				price: product.price,
-	// 				description: product.description,
-	// 				quantity,
-	// 			})
-	// 		);
-
-	// 		console.log(`Added ${quantity} ${product.name}(s) to cart.`);
-	// 	} catch (error) {
-	// 		console.error(error);
-	// 	}
-	// }
-
 	return (
 		<ScrollView style={{ flex: 1, backgroundColor: "#eae1eb" }}>
 			<View style={styles.container}>

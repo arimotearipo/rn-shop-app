@@ -1,4 +1,9 @@
-import { View, Text, Button } from "react-native";
+/**
+ * A DUMMY SCREEN TO BE USED TO TEST THE CALLING OF
+ * AN API FROM THE UI
+ */
+
+import { View } from "react-native";
 import { CustomTouchableOpacity } from "../components/customized-components/";
 import axios from "axios";
 import { TextInput } from "react-native-gesture-handler";

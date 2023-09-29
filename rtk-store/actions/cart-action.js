@@ -1,5 +1,6 @@
 import { updateCart, loadCart, removeFromCart } from "../slices/cartSlice";
 import { updateCartAPI, getCartAPI } from "../../services";
+import { printf } from "../../utils";
 
 export function loadCartAction() {
 	return async function (dispatch, getState) {
@@ -61,6 +62,8 @@ export function removeFromCartAction(itemToRemove) {
 		const prevCartItems = getState().cart.items;
 
 		dispatch(removeFromCart(itemToRemove));
+
+		printf("cartItems", getState().cart.items);
 
 		try {
 			const updatedCartItems = getState().cart.items.map((item) => {

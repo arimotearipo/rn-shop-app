@@ -19,27 +19,6 @@ export default function Login() {
 
 	console.log("formErrors", errors);
 
-	/*
-	function handleLogin({ username, password }) {
-		loginAPI({ username, password })
-			.then((response) => {
-				console.log(
-					`Logged in\nusername: ${response.data.username}\nid: ${response.data._id}`
-				);
-				dispatch(
-					loginUser({
-						username: response.data.username,
-						userId: response.data._id,
-					})
-				);
-				navigation.navigate("Home");
-			})
-			.catch((err) => {
-				console.error("client", err);
-			});
-	}
-	*/
-
 	async function handleLogin({ username, password }) {
 		try {
 			await dispatch(loginAction({ username, password }));

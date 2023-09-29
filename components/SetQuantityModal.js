@@ -92,7 +92,7 @@ export function SetQuantityModal({
 					name: product.name,
 					price: product.price,
 					description: product.description,
-					quantity: +quantity,
+					quantity: +quantityInCart,
 				})
 			);
 
