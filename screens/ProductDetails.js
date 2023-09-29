@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
-import AddToCartModal from "../components/AddToCartModal";
 import SetQuantityModal from "../components/SetQuantityModal";
 import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
 import { useNavigation } from "@react-navigation/native";
@@ -73,11 +72,6 @@ export default function ProductDetail({ route }) {
 					textStyle={styles.buttonText}
 					text={"Go Back"}
 				/>
-				{/* <AddToCartModal
-					isVisible={isModalVisible}
-					onClose={() => setIsModalVisible(false)}
-					product={product}
-				/> */}
 				<SetQuantityModal
 					isVisible={isModalVisible}
 					onClose={() => setIsModalVisible(false)}

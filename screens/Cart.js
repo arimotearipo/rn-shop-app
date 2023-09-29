@@ -9,7 +9,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import CartProduct from "../components/CartProduct";
-// import RemoveFromCartModal from "../components/RemoveFromCartModal";
 import SetQuantityModal from "../components/SetQuantityModal";
 import EmptyCart from "../components/EmptyCart";
 import { removeFromCart } from "../rtk-store/slices/cartSlice";

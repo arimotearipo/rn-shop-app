@@ -1,3 +1,9 @@
+/**
+ * DEPRECATED.
+ * This component has been refactored into
+ * the SetQuantityModal component
+ */
+
 import React, { useState } from "react";
 import {
 	View,
