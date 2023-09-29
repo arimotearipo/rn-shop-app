@@ -19,7 +19,6 @@ export default function SetQuantityModal({
 	quantityInCart = "1",
 	isAddToCart = false,
 }) {
-	printf("product", product);
 	const [quantity, setQuantity] = useState(quantityInCart.toString());
 	const [inputError, setInputError] = useState(false);
 
@@ -46,7 +45,9 @@ export default function SetQuantityModal({
 
 	// When user clicks the - button
 	function handleDecrement() {
+		if (isAddToCart && +quantity <= 1) return; // Minimum is 1 for add to cart
 		if (+quantity <= 0) return; // Minimum is 0
+
 		setQuantity((prev) => {
 			checkInputError((+prev + 1).toString());
 			return (+prev - 1).toString();
