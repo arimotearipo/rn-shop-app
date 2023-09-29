@@ -3,9 +3,8 @@ import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
 import { View, StyleSheet, Text } from "react-native";
 import { useForm } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
-import { loginAPI } from "../service/login-service";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../rtk-store/slices/userSlice";
+import { loadCartAction, loginAction } from "../rtk-store/actions";
 
 export default function Login() {
 	const {
@@ -18,6 +17,7 @@ export default function Login() {
 
 	console.log("formErrors", errors);
 
+	/*
 	function handleLogin({ username, password }) {
 		loginAPI({ username, password })
 			.then((response) => {
@@ -35,6 +35,17 @@ export default function Login() {
 			.catch((err) => {
 				console.error("client", err);
 			});
+	}
+	*/
+
+	async function handleLogin({ username, password }) {
+		try {
+			await dispatch(loginAction({ username, password }));
+			await dispatch(loadCartAction());
+			navigation.navigate("Home");
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
 	return (

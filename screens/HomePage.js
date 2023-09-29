@@ -10,9 +10,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import Product from "../components/Product";
 import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
-import { allProductsAPI } from "../service";
-import { useSelector } from "react-redux";
-import { printf } from "../utils";
+import { allProductsAPI } from "../services";
 
 export default function HomePage() {
 	const [products, setProducts] = useState([]);

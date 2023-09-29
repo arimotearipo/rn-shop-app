@@ -3,7 +3,7 @@ import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
 import CustomInput from "../components/CustomInput";
 import { useForm } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
-import { signupAPI } from "../service";
+import { signupAPI } from "../services";
 
 export default function Signup() {
 	const {
@@ -11,27 +11,31 @@ export default function Signup() {
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
+
 	const navigation = useNavigation();
 
 	function validateIfPasswordsMatch({ password, confirmPassword }) {
 		return password === confirmPassword || "Passwords do not match";
 	}
 
-	function handleSignup(data) {
-		signupAPI({
-			fullname: data.fullname,
-			username: data.username,
-			password: data.password,
-		})
-			.then((response) => {
-				console.log("Signup success");
-				console.log(response);
-				navigation.navigate("Login");
-			})
-			.catch((err) => {
-				console.log("Signup failed");
-				console.error(err);
+	async function handleSignup(data) {
+		try {
+			console.log("Signing up user...");
+
+			const response = await signupAPI({
+				fullname: data.fullname,
+				username: data.username,
+				password: data.password,
 			});
+
+			console.log("Signup success...");
+			console.log(response);
+
+			navigation.navigate("Login");
+		} catch (error) {
+			console.log("Signup failed");
+			console.error(error);
+		}
 	}
 
 	return (

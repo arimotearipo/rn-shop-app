@@ -6,6 +6,8 @@ import { addToCart } from "../rtk-store/slices/cartSlice";
 import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
 import { useNavigation } from "@react-navigation/native";
 import { numberInAccount } from "../utils/numberInAccount";
+import { printf } from "../utils";
+import { addToCartAction } from "../rtk-store/actions";
 
 export default function ProductDetail({ route }) {
 	const { product } = route.params;
@@ -14,17 +16,36 @@ export default function ProductDetail({ route }) {
 	const navigation = useNavigation();
 	const cartItems = useSelector((state) => state.cart.items);
 
-	const handleAddToCart = (quantity) => {
-		dispatch(
-			addToCart({
-				id: product._id,
-				price: product.price,
-				name: product.name,
-				qty: quantity,
-			})
-		);
-		console.log(`Added ${quantity} ${product.name}(s) to cart.`);
-	};
+	// const handleAddToCart = (quantity) => {
+	// 	dispatch(
+	// 		addToCart({
+	// 			_id: product._id,
+	// 			name: product.name,
+	// 			price: product.price,
+	// 			description: product.description,
+	// 			quantity,
+	// 		})
+	// 	);
+	// 	console.log(`Added ${quantity} ${product.name}(s) to cart.`);
+	// };
+
+	async function handleAddToCart(quantity) {
+		try {
+			await dispatch(
+				addToCartAction({
+					_id: product._id,
+					name: product.name,
+					price: product.price,
+					description: product.description,
+					quantity,
+				})
+			);
+
+			console.log(`Added ${quantity} ${product.name}(s) to cart.`);
+		} catch (error) {
+			console.error(error);
+		}
+	}
 
 	return (
 		<ScrollView style={{ flex: 1, backgroundColor: "#eae1eb" }}>

@@ -6,40 +6,29 @@ import {
 	FlatList,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import CartProduct from "../components/CartProduct";
 import RemoveFromCartModal from "../components/RemoveFromCartModal";
 import EmptyCart from "../components/EmptyCart";
-import { removeFromCart, initializeCart } from "../rtk-store/slices/cartSlice";
+import { removeFromCart } from "../rtk-store/slices/cartSlice";
 import CustomTouchableOpacity from "../components/CustomTouchableOpacity";
 import { numberInAccount } from "../utils/";
-import { getCartAPI } from "../service";
 
 export default function Cart() {
 	const cartItems = useSelector((state) => state.cart.items);
-	const userId = useSelector((state) => state.user.userId);
 
 	const [itemToRemove, setItemToRemove] = useState({});
 	const [isModalVisible, setIsModalVisible] = useState(false);
+
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		getCartAPI(userId)
-			.then((response) => {
-				dispatch(initializeCart(response.data));
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	}, []);
+	const navigation = useNavigation();
 
 	const totalAmount = cartItems.reduce(
 		(total, item) => total + item.price * item.quantity,
 		0
 	);
-
-	const navigation = useNavigation();
 
 	function handleCheckout() {
 		navigation.navigate("ShippingForm", { totalAmount });
@@ -48,10 +37,8 @@ export default function Cart() {
 	function handleRemoveFromCart(quantity) {
 		dispatch(
 			removeFromCart({
-				id: itemToRemove.id,
-				price: itemToRemove.price,
-				name: itemToRemove.name,
-				qty: quantity,
+				_id: itemToRemove._id,
+				quantity,
 			})
 		);
 		console.log(`Removed ${quantity} ${itemToRemove.name}(s) from cart.`);
@@ -107,7 +94,7 @@ export default function Cart() {
 					isVisible={isModalVisible}
 					onClose={() => setIsModalVisible(false)}
 					onRemoveFromCart={handleRemoveFromCart}
-					currentQuantity={itemToRemove.qty}
+					currentQuantity={itemToRemove.quantity}
 				/>
 			)}
 		</View>
