@@ -4,22 +4,22 @@ import { CustomTouchableOpacity } from "../components/customized-components/";
 import { useNavigation } from "@react-navigation/native";
 import { AirbnbRating } from "@rneui/themed";
 import { DEFAULT_SHIPPING, DEFAULT_PAYMENT } from "../utils/constants";
-import { numberInAccount, formatCardNumber } from "../utils/";
+import {
+	numberInAccount,
+	formatCardNumber,
+	buildShippingAddress,
+} from "../utils/";
 
 export default function OrderConfirmation({ route }) {
 	const { shippingData, paymentData, totalAmount, timestamp } = route.params;
 
 	const navigation = useNavigation();
 
-	console.log(JSON.stringify(shippingData, null, 2));
-	console.log(JSON.stringify(paymentData, null, 2));
-	console.log(JSON.stringify(totalAmount, null, 2));
+	// console.log(JSON.stringify(shippingData, null, 2));
+	// console.log(JSON.stringify(paymentData, null, 2));
+	// console.log(JSON.stringify(totalAmount, null, 2));
 
-	const fullShippingAddress = `${
-		shippingData.shippingAddress || DEFAULT_SHIPPING.shippingAddress
-	}\n${shippingData.zipcode || DEFAULT_SHIPPING.zipcode} ${
-		shippingData.city || DEFAULT_SHIPPING.city
-	}\n${shippingData.country || DEFAULT_SHIPPING.country}`;
+	const fullShippingAddress = buildShippingAddress(shippingData);
 
 	return (
 		<ScrollView
@@ -83,12 +83,10 @@ export default function OrderConfirmation({ route }) {
 					{paymentData.paymentMethod === "Online Banking" && (
 						<Info title={"Bank:"} description={paymentData.bank} />
 					)}
-					<View style={styles.amountPaidContainer}>
-						<Text style={styles.amountPaidText}>Amount Paid:</Text>
-						<Text style={styles.amountPaidText}>
-							{numberInAccount(totalAmount.toFixed(2))} MYR
-						</Text>
-					</View>
+					<Info
+						title={"Amount Paid:"}
+						description={`RM ${numberInAccount(totalAmount.toFixed(2))}`}
+					/>
 				</View>
 
 				{/* Ratings */}
@@ -141,12 +139,9 @@ const styles = StyleSheet.create({
 	},
 	amountPaidContainer: {
 		width: "80%",
-		flexDirection: "row",
-		justifyContent: "space-between",
 		alignSelf: "center",
+		alignItems: "center",
 		borderColor: "black",
-		// borderWidth: 1,
-		borderRadius: 10,
 		padding: 10,
 	},
 	amountPaidText: {

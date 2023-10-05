@@ -4,7 +4,7 @@ import { useRoute } from "@react-navigation/native";
 
 const ICON_SIZE = 32;
 
-export function Header({ navigation }) {
+export function ScreenHeader({ navigation }) {
 	const route = useRoute();
 
 	function handleOpenDrawer() {
@@ -22,7 +22,7 @@ export function Header({ navigation }) {
 	return (
 		<View style={styles.headerContainer}>
 			<TouchableOpacity onPress={handleOpenDrawer}>
-				<Icon name="menu" size={ICON_SIZE} />
+				<Icon name="menuunfold" type="antdesign" size={ICON_SIZE} />
 			</TouchableOpacity>
 
 			{/* Cart button is only shown on product list screen */}

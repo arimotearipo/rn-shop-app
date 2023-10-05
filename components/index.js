@@ -6,4 +6,4 @@ export { OnlineBanking } from "./OnlineBanking";
 export { Product } from "./Product";
 export { SetQuantityModal } from "./SetQuantityModal";
 export { DrawerContent } from "./DrawerContent";
-export { Header } from "./Header";
+export { ScreenHeader } from "./ScreenHeader";

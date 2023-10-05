@@ -4,6 +4,7 @@ import { CustomTouchableOpacity } from "./customized-components";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../rtk-store/slices/userSlice";
+import { Icon } from "@rneui/base";
 
 export function DrawerContent({ navigation }) {
 	const dispatch = useDispatch();
@@ -21,10 +22,17 @@ export function DrawerContent({ navigation }) {
 		navigation.navigate("ProductList");
 	}
 
+	function handleCloseDrawer() {
+		navigation.closeDrawer();
+	}
+
 	return (
 		<DrawerContentScrollView style={styles.container}>
 			<View style={styles.header}>
 				<Text style={styles.headerText}>RN Shop App</Text>
+				<TouchableOpacity onPress={handleCloseDrawer}>
+					<Icon name="menufold" type="antdesign" size={32} />
+				</TouchableOpacity>
 			</View>
 			<CustomTouchableOpacity
 				style={styles.buttons}
@@ -55,10 +63,14 @@ const styles = StyleSheet.create({
 	header: {
 		backgroundColor: "#e1bce6",
 		padding: 16,
+		flexDirection: "row",
+		justifyContent: "space-between",
+		verticalAlign: "center",
 	},
 	headerText: {
 		color: "black",
 		fontSize: 20,
+		fontWeight: "bold",
 	},
 	buttons: {
 		marginTop: 16,
