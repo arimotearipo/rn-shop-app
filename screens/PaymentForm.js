@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import RadioGroup from "react-native-radio-buttons-group";
 import { find } from "lodash";
 import { numberInAccount } from "../utils/";
+import { handleGoBack } from "../utils/navigation-utils";
 
 export default function PaymentForm({ route }) {
 	const { totalAmount, shippingData } = route.params;
@@ -57,8 +58,10 @@ export default function PaymentForm({ route }) {
 		});
 	}
 
+	// Disable the Place Order button if the payment method is
+	// online banking / debit/credit card and the form is not filled
 	function checkButtonDisabled() {
-		if (paymentMethod === "3") return false;
+		if (paymentMethod === "3") return false; // Cash on Delivery
 
 		if (Object.keys(errors).length != 0) return true;
 
@@ -115,7 +118,7 @@ export default function PaymentForm({ route }) {
 				/>
 				<CustomTouchableOpacity
 					style={styles.goBackButton}
-					onPress={() => navigation.goBack()}
+					onPress={handleGoBack}
 					text={"Go Back"}
 					textStyle={styles.buttonText}
 				/>

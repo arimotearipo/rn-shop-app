@@ -1,24 +1,18 @@
-import { SafeAreaView, View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { CustomTouchableOpacity } from "./customized-components/";
-import { useNavigation } from "@react-navigation/native";
+import { handleGoToShop } from "../utils/navigation-utils";
 
 export function EmptyCart() {
-	const navigation = useNavigation();
-
 	return (
-		<SafeAreaView style={{ flex: 1 }}>
-			<View style={styles.container}>
-				<Text style={styles.text}>You have nothing in your cart</Text>
-				{/* <View style={styles.backToShopButtonContainer}> */}
-				<CustomTouchableOpacity
-					style={styles.backToShopButton}
-					text={"Back to Shop"}
-					textStyle={styles.backToShopText}
-					onPress={() => navigation.navigate("ProductList")}
-				/>
-				{/* </View> */}
-			</View>
-		</SafeAreaView>
+		<View style={styles.container}>
+			<Text style={styles.text}>You have nothing in your cart</Text>
+			<CustomTouchableOpacity
+				style={styles.backToShopButton}
+				text={"Back to Shop"}
+				textStyle={styles.backToShopText}
+				onPress={handleGoToShop}
+			/>
+		</View>
 	);
 }
 

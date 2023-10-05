@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { Info } from "../components";
 import { CustomTouchableOpacity } from "../components/customized-components/";
-import { useNavigation } from "@react-navigation/native";
 import { AirbnbRating } from "@rneui/themed";
 import { DEFAULT_SHIPPING, DEFAULT_PAYMENT } from "../utils/constants";
 import {
@@ -9,11 +8,10 @@ import {
 	formatCardNumber,
 	buildShippingAddress,
 } from "../utils/";
+import { handleGoToShop } from "../utils/navigation-utils";
 
 export default function OrderConfirmation({ route }) {
 	const { shippingData, paymentData, totalAmount, timestamp } = route.params;
-
-	const navigation = useNavigation();
 
 	// console.log(JSON.stringify(shippingData, null, 2));
 	// console.log(JSON.stringify(paymentData, null, 2));
@@ -107,7 +105,7 @@ export default function OrderConfirmation({ route }) {
 					text={"Back to Shop"}
 					style={styles.backToShopButton}
 					textStyle={styles.backToShopText}
-					onPress={() => navigation.navigate("ProductList")}
+					onPress={handleGoToShop}
 				/>
 			</View>
 		</ScrollView>

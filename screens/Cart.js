@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import { CartProduct, SetQuantityModal, EmptyCart } from "../components/";
 import { CustomTouchableOpacity } from "../components/customized-components/";
 import { numberInAccount } from "../utils/";
+import { handleGoBack } from "../utils/navigation-utils";
 
 export default function Cart() {
 	const cartItems = useSelector((state) => state.cart.items);
@@ -29,6 +30,18 @@ export default function Cart() {
 		navigation.navigate("ShippingForm", { totalAmount });
 	}
 
+	function handleShowModal() {
+		setIsModalVisible(true);
+	}
+
+	function handleCloseModal() {
+		setIsModalVisible(false);
+	}
+
+	function handleSetItemToRemove(item) {
+		setItemToRemove(item);
+	}
+
 	if (cartItems.length === 0) {
 		return <EmptyCart />;
 	}
@@ -45,8 +58,8 @@ export default function Cart() {
 					renderItem={({ item }) => (
 						<CartProduct
 							item={item}
-							onGetItemDetails={(item) => setItemToRemove(item)}
-							onShowModal={() => setIsModalVisible(true)}
+							onGetItemDetails={handleSetItemToRemove}
+							onShowModal={handleShowModal}
 						/>
 					)}
 				/>
@@ -57,7 +70,7 @@ export default function Cart() {
 				<CustomTouchableOpacity
 					text={"Go Back"}
 					style={styles.goBackButton}
-					onPress={() => navigation.goBack()}
+					onPress={handleGoBack}
 					textStyle={styles.buttonText}
 				/>
 
@@ -77,7 +90,7 @@ export default function Cart() {
 			{isModalVisible && (
 				<SetQuantityModal
 					isVisible={isModalVisible}
-					onClose={() => setIsModalVisible(false)}
+					onClose={handleCloseModal}
 					product={itemToRemove}
 					quantityInCart={itemToRemove.quantity}
 				/>

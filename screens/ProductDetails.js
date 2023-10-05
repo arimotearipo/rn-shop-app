@@ -3,14 +3,21 @@ import { useSelector } from "react-redux";
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import { SetQuantityModal } from "../components/";
 import { CustomTouchableOpacity } from "../components/customized-components/";
-import { useNavigation } from "@react-navigation/native";
 import { numberInAccount } from "../utils/";
+import { handleGoToCart, handleGoToShop } from "../utils/navigation-utils";
 
 export default function ProductDetail({ route }) {
 	const { product } = route.params;
 	const [isModalVisible, setIsModalVisible] = useState(false);
-	const navigation = useNavigation();
 	const cartItems = useSelector((state) => state.cart.items);
+
+	function handleShowModal() {
+		setIsModalVisible(true);
+	}
+
+	function handleCloseModal() {
+		setIsModalVisible(false);
+	}
 
 	return (
 		<ScrollView style={{ flex: 1, backgroundColor: "#eae1eb" }}>
@@ -23,7 +30,7 @@ export default function ProductDetail({ route }) {
 				<Text style={styles.productDescriptionText}>{product.description}</Text>
 				<CustomTouchableOpacity
 					style={styles.addToCartButton}
-					onPress={() => setIsModalVisible(true)}
+					onPress={handleShowModal}
 					textStyle={styles.buttonText}
 					text={"Add to Cart"}
 				/>
@@ -33,7 +40,7 @@ export default function ProductDetail({ route }) {
 				{cartItems.length != 0 && (
 					<CustomTouchableOpacity
 						style={styles.goToCartButton}
-						onPress={() => navigation.navigate("Cart")}
+						onPress={handleGoToCart}
 						textStyle={styles.buttonText}
 						text={"Go to Cart"}
 					/>
@@ -42,7 +49,7 @@ export default function ProductDetail({ route }) {
 				{/* Go Back button */}
 				<CustomTouchableOpacity
 					style={styles.goBackButton}
-					onPress={() => navigation.navigate("ProductList")}
+					onPress={handleGoToShop}
 					textStyle={styles.buttonText}
 					text={"Go Back"}
 				/>
@@ -50,7 +57,7 @@ export default function ProductDetail({ route }) {
 				{/* Modal to set quantity */}
 				<SetQuantityModal
 					isVisible={isModalVisible}
-					onClose={() => setIsModalVisible(false)}
+					onClose={handleCloseModal}
 					product={product}
 					isAddToCart={true}
 				/>
