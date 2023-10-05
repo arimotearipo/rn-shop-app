@@ -14,7 +14,7 @@ export function EmptyCart() {
 					style={styles.backToShopButton}
 					text={"Back to Shop"}
 					textStyle={styles.backToShopText}
-					onPress={() => navigation.navigate("Home")}
+					onPress={() => navigation.navigate("ProductList")}
 				/>
 				{/* </View> */}
 			</View>

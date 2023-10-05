@@ -8,8 +8,7 @@ import {
 	useWindowDimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Product } from "../components/";
-import { CustomTouchableOpacity } from "../components/customized-components/";
+import { Product } from "../components";
 import { allProductsAPI } from "../services";
 
 export default function HomePage() {
@@ -35,28 +34,7 @@ export default function HomePage() {
 
 	return (
 		<View style={styles.container}>
-			{/* Header */}
-			<View style={styles.headerContainer}>
-				{/* Go to Cart button */}
-				<CustomTouchableOpacity
-					style={styles.goToCartButton}
-					onPress={() => navigation.navigate("Cart")}
-					text={"Go To Cart 🛒"}
-					textStyle={styles.buttonText}
-				/>
-
-				{/* Logout button */}
-				<CustomTouchableOpacity
-					text={"Logout"}
-					onPress={() => navigation.navigate("Login")}
-					style={styles.logoutButton}
-					textStyle={styles.buttonText}
-				/>
-			</View>
-
-			<View style={styles.titleContainer}>
-				<Text style={styles.titleText}>Product List</Text>
-			</View>
+			<Text style={styles.header}>Product List</Text>
 			{/* Flatlist */}
 			<View style={styles.flatListContainer}>
 				<FlatList
@@ -77,24 +55,13 @@ export default function HomePage() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingTop: 40,
 		backgroundColor: "#eae1eb",
+		alignItems: "center",
 	},
-	headerContainer: {
-		height: 90,
-		flexDirection: "row",
-		justifyContent: "space-between",
-		padding: 20,
-		verticalAlign: "middle",
-	},
-	titleContainer: {
-		padding: 10,
-		alignSelf: "center",
-	},
-	titleText: {
-		height: "auto",
+	header: {
 		fontWeight: "bold",
-		fontSize: 20,
+		fontSize: 24,
+		marginBottom: 20,
 	},
 	flatListContainer: {
 		flex: 1,

@@ -90,12 +90,11 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: "space-between",
-		paddingTop: 40,
 		backgroundColor: "#eae1eb",
 	},
 	headerContainer: {
 		alignSelf: "center",
-		marginVertical: 10,
+		marginBottom: 10,
 	},
 	headerText: {
 		fontSize: 24,

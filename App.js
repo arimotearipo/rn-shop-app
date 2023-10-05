@@ -1,48 +1,76 @@
+import "react-native-gesture-handler";
 import React from "react";
 import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import {
 	API,
 	Login,
 	Signup,
-	HomePage,
+	ProductList,
 	ProductDetails,
 	Cart,
 	OrderConfirmation,
 	PaymentForm,
 	ShippingForm,
 } from "./screens";
+import { DrawerContent, DrawerButton } from "./components";
 import store from "./rtk-store/store";
 
 const Stack = createStackNavigator();
 
-const App = () => {
+function StackNavigator() {
 	return (
-		// <SafeAreaView style={{ flex: 1 }}>
+		<Stack.Navigator
+			initialRouteName="Login"
+			screenOptions={{
+				header: ({ navigation }) => <DrawerButton navigation={navigation} />,
+			}}
+		>
+			<Stack.Screen
+				name="Login"
+				component={Login}
+				options={{ headerShown: false }}
+			/>
+			<Stack.Screen
+				name="Signup"
+				component={Signup}
+				options={{ headerShown: false }}
+			/>
+			<Stack.Screen name="ProductList" component={ProductList} />
+			<Stack.Screen name="ProductDetails" component={ProductDetails} />
+			<Stack.Screen name="Cart" component={Cart} />
+			<Stack.Screen name="ShippingForm" component={ShippingForm} />
+			<Stack.Screen name="PaymentForm" component={PaymentForm} />
+			<Stack.Screen name="OrderConfirmation" component={OrderConfirmation} />
+		</Stack.Navigator>
+	);
+}
+
+const Drawer = createDrawerNavigator();
+
+function DrawerNavigator() {
+	return (
+		<Drawer.Navigator
+			drawerContent={({ navigation }) => (
+				<DrawerContent navigation={navigation} />
+			)}
+			screenOptions={{ headerShown: false }}
+		>
+			<Drawer.Screen name="Home" component={StackNavigator} />
+		</Drawer.Navigator>
+	);
+}
+
+function App() {
+	return (
 		<Provider store={store}>
 			<NavigationContainer>
-				<Stack.Navigator
-					initialRouteName="Login"
-					screenOptions={{ headerShown: false }}
-				>
-					{/* <Stack.Screen name="API" component={API} /> */}
-					<Stack.Screen name="Home" component={HomePage} />
-					<Stack.Screen name="Login" component={Login} />
-					<Stack.Screen name="Signup" component={Signup} />
-					<Stack.Screen name="ProductDetails" component={ProductDetails} />
-					<Stack.Screen name="Cart" component={Cart} />
-					<Stack.Screen name="ShippingForm" component={ShippingForm} />
-					<Stack.Screen name="PaymentForm" component={PaymentForm} />
-					<Stack.Screen
-						name="OrderConfirmation"
-						component={OrderConfirmation}
-					/>
-				</Stack.Navigator>
+				<DrawerNavigator />
 			</NavigationContainer>
 		</Provider>
-		// </SafeAreaView>
 	);
-};
+}
 
 export default App;

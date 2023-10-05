@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { Info } from "../components";
 import { CustomTouchableOpacity } from "../components/customized-components/";
 import { useNavigation } from "@react-navigation/native";
-import { AirbnbRating } from "react-native-ratings";
+import { AirbnbRating } from "@rneui/themed";
 import { DEFAULT_SHIPPING, DEFAULT_PAYMENT } from "../utils/constants";
 import { numberInAccount, formatCardNumber } from "../utils/";
 
@@ -26,8 +26,6 @@ export default function OrderConfirmation({ route }) {
 			style={{
 				flex: 1,
 				backgroundColor: "#eae1eb",
-				borderWidth: 1,
-				borderColor: "red",
 			}}
 		>
 			<View style={styles.container}>
@@ -111,7 +109,7 @@ export default function OrderConfirmation({ route }) {
 					text={"Back to Shop"}
 					style={styles.backToShopButton}
 					textStyle={styles.backToShopText}
-					onPress={() => navigation.navigate("Home")}
+					onPress={() => navigation.navigate("ProductList")}
 				/>
 			</View>
 		</ScrollView>
@@ -121,7 +119,7 @@ export default function OrderConfirmation({ route }) {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingTop: 40,
+		// paddingTop: 40,
 		paddingHorizontal: 10,
 		justifyContent: "space-between",
 	},

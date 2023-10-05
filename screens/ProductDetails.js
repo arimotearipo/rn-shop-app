@@ -27,6 +27,9 @@ export default function ProductDetail({ route }) {
 					textStyle={styles.buttonText}
 					text={"Add to Cart"}
 				/>
+
+				{/* Go To Cart button.
+					Only show this button if cart is not empty */}
 				{cartItems.length != 0 && (
 					<CustomTouchableOpacity
 						style={styles.goToCartButton}
@@ -35,12 +38,16 @@ export default function ProductDetail({ route }) {
 						text={"Go to Cart"}
 					/>
 				)}
+
+				{/* Go Back button */}
 				<CustomTouchableOpacity
 					style={styles.goBackButton}
-					onPress={() => navigation.navigate("Home")}
+					onPress={() => navigation.navigate("ProductList")}
 					textStyle={styles.buttonText}
 					text={"Go Back"}
 				/>
+
+				{/* Modal to set quantity */}
 				<SetQuantityModal
 					isVisible={isModalVisible}
 					onClose={() => setIsModalVisible(false)}
@@ -55,7 +62,7 @@ export default function ProductDetail({ route }) {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingTop: 40,
+		// paddingTop: 40,
 		justifyContent: "flex-start",
 		alignItems: "center",
 	},

@@ -23,7 +23,7 @@ export default function Login() {
 		try {
 			await dispatch(loginAction({ username, password }));
 			await dispatch(loadCartAction());
-			navigation.navigate("Home");
+			navigation.navigate("ProductList");
 		} catch (error) {
 			console.error(error);
 		}

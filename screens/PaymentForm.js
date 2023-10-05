@@ -127,7 +127,7 @@ export default function PaymentForm({ route }) {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingTop: 40,
+		// paddingTop: 40,
 		justifyContent: "space-evenly",
 		alignItems: "center",
 	},

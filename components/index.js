@@ -5,3 +5,5 @@ export { Info } from "./Info";
 export { OnlineBanking } from "./OnlineBanking";
 export { Product } from "./Product";
 export { SetQuantityModal } from "./SetQuantityModal";
+export { DrawerContent } from "./DrawerContent";
+export { DrawerButton } from "./DrawerButton";
