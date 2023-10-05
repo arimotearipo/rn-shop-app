@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { CustomTouchableOpacity } from "./customized-components";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { useDispatch } from "react-redux";
@@ -49,13 +49,15 @@ export function DrawerContent({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-	container: {},
+	container: {
+		backgroundColor: "#ece4ed",
+	},
 	header: {
-		backgroundColor: "#007bff",
+		backgroundColor: "#e1bce6",
 		padding: 16,
 	},
 	headerText: {
-		color: "white",
+		color: "black",
 		fontSize: 20,
 	},
 	buttons: {
@@ -63,7 +65,7 @@ const styles = StyleSheet.create({
 		marginLeft: 16,
 	},
 	texts: {
-		color: "#007bff",
+		color: "black",
 		fontSize: 16,
 	},
 });
