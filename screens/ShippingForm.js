@@ -7,7 +7,6 @@ import {
 } from "../components/customized-components/";
 import { useNavigation } from "@react-navigation/native";
 import { EMAIL_REGEX } from "../utils/constants";
-import { handleGoBack } from "../utils/navigation-utils";
 
 export default function ShippingForm({ route }) {
 	const { totalAmount } = route.params;
@@ -123,7 +122,7 @@ export default function ShippingForm({ route }) {
 				/>
 				<CustomTouchableOpacity
 					style={styles.goBackButton}
-					onPress={handleGoBack}
+					onPress={() => navigation.goBack()}
 					text={"Go Back"}
 					textStyle={styles.payButtonText}
 				/>

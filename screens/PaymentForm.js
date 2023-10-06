@@ -7,7 +7,6 @@ import { useNavigation } from "@react-navigation/native";
 import RadioGroup from "react-native-radio-buttons-group";
 import { find } from "lodash";
 import { numberInAccount } from "../utils/";
-import { handleGoBack } from "../utils/navigation-utils";
 
 export default function PaymentForm({ route }) {
 	const { totalAmount, shippingData } = route.params;
@@ -118,7 +117,7 @@ export default function PaymentForm({ route }) {
 				/>
 				<CustomTouchableOpacity
 					style={styles.goBackButton}
-					onPress={handleGoBack}
+					onPress={() => navigation.goBack()}
 					text={"Go Back"}
 					textStyle={styles.buttonText}
 				/>

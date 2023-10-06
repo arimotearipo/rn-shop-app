@@ -13,7 +13,7 @@ export function loadCartAction() {
 
 			console.log("Cart items received...");
 
-			dispatch(loadCart(response.data));
+			dispatch(loadCart(response.data.line_items));
 		} catch (error) {
 			console.error(error);
 		}

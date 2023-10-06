@@ -14,14 +14,6 @@ export function DrawerContent({ navigation }) {
 		navigation.navigate("Login");
 	}
 
-	function handleGoToCart() {
-		navigation.navigate("Cart");
-	}
-
-	function handleGoToShop() {
-		navigation.navigate("ProductList");
-	}
-
 	function handleCloseDrawer() {
 		navigation.closeDrawer();
 	}
@@ -38,13 +30,13 @@ export function DrawerContent({ navigation }) {
 				style={styles.buttons}
 				textStyle={styles.texts}
 				text={"Shop"}
-				onPress={handleGoToShop}
+				onPress={() => navigation.navigate("ProductList")}
 			/>
 			<CustomTouchableOpacity
 				style={styles.buttons}
 				textStyle={styles.texts}
 				text={"Cart"}
-				onPress={handleGoToCart}
+				onPress={() => navigation.navigate("Cart")}
 			/>
 			<CustomTouchableOpacity
 				style={styles.buttons}

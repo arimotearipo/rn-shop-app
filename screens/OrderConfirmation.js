@@ -8,10 +8,11 @@ import {
 	formatCardNumber,
 	buildShippingAddress,
 } from "../utils/";
-import { handleGoToShop } from "../utils/navigation-utils";
+import { useNavigation } from "@react-navigation/native";
 
 export default function OrderConfirmation({ route }) {
 	const { shippingData, paymentData, totalAmount, timestamp } = route.params;
+	const navigation = useNavigation();
 
 	// console.log(JSON.stringify(shippingData, null, 2));
 	// console.log(JSON.stringify(paymentData, null, 2));
@@ -105,7 +106,7 @@ export default function OrderConfirmation({ route }) {
 					text={"Back to Shop"}
 					style={styles.backToShopButton}
 					textStyle={styles.backToShopText}
-					onPress={handleGoToShop}
+					onPress={() => navigation.navigate("Shop")}
 				/>
 			</View>
 		</ScrollView>

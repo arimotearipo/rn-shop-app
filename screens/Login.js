@@ -70,7 +70,7 @@ export default function Login() {
 				style={styles.signupButton}
 				text={"Go to Signup"}
 				textStyle={styles.buttonText}
-				onPress={handleGoToSignup}
+				onPress={() => navigation.navigate("Signup")}
 			/>
 		</View>
 	);

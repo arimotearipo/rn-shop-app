@@ -4,10 +4,11 @@ import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import { SetQuantityModal } from "../components/";
 import { CustomTouchableOpacity } from "../components/customized-components/";
 import { numberInAccount } from "../utils/";
-import { handleGoToCart, handleGoToShop } from "../utils/navigation-utils";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ProductDetail({ route }) {
 	const { product } = route.params;
+	const navigation = useNavigation();
 	const [isModalVisible, setIsModalVisible] = useState(false);
 	const cartItems = useSelector((state) => state.cart.items);
 
@@ -40,7 +41,7 @@ export default function ProductDetail({ route }) {
 				{cartItems.length != 0 && (
 					<CustomTouchableOpacity
 						style={styles.goToCartButton}
-						onPress={handleGoToCart}
+						onPress={() => navigation.navigate("Cart")}
 						textStyle={styles.buttonText}
 						text={"Go to Cart"}
 					/>
@@ -49,7 +50,7 @@ export default function ProductDetail({ route }) {
 				{/* Go Back button */}
 				<CustomTouchableOpacity
 					style={styles.goBackButton}
-					onPress={handleGoToShop}
+					onPress={() => navigation.goBack()}
 					textStyle={styles.buttonText}
 					text={"Go Back"}
 				/>

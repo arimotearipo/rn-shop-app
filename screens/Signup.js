@@ -6,7 +6,6 @@ import {
 import { useForm } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
 import { signupAPI } from "../services";
-import { handleGoToLogin } from "../utils/navigation-utils";
 
 export default function Signup() {
 	const {
@@ -101,7 +100,7 @@ export default function Signup() {
 				style={styles.loginButton}
 				text={"Go to Login"}
 				textStyle={styles.buttonText}
-				onPress={handleGoToLogin}
+				onPress={() => navigation.navigate("Login")}
 			/>
 		</View>
 	);

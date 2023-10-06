@@ -6,7 +6,7 @@ export async function getCartAPI(userId) {
 			const response = await axios.get(
 				`http://10.0.2.2:3000/api/cart/${userId}`
 			);
-			resolve(response.data);
+			resolve(response);
 		} catch (error) {
 			reject(error);
 		}

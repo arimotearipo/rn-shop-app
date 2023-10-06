@@ -1,8 +1,10 @@
 import { View, Text, StyleSheet } from "react-native";
 import { CustomTouchableOpacity } from "./customized-components/";
-import { handleGoToShop } from "../utils/navigation-utils";
+import { useNavigation } from "@react-navigation/native";
 
 export function EmptyCart() {
+	const navigation = useNavigation();
+
 	return (
 		<View style={styles.container}>
 			<Text style={styles.text}>You have nothing in your cart</Text>
@@ -10,7 +12,7 @@ export function EmptyCart() {
 				style={styles.backToShopButton}
 				text={"Back to Shop"}
 				textStyle={styles.backToShopText}
-				onPress={handleGoToShop}
+				onPress={() => navigation.navigate("Shop")}
 			/>
 		</View>
 	);

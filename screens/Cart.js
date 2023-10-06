@@ -11,10 +11,11 @@ import { useNavigation } from "@react-navigation/native";
 import { CartProduct, SetQuantityModal, EmptyCart } from "../components/";
 import { CustomTouchableOpacity } from "../components/customized-components/";
 import { numberInAccount } from "../utils/";
-import { handleGoBack } from "../utils/navigation-utils";
+import { getCartAPI } from "../services";
 
 export default function Cart() {
 	const cartItems = useSelector((state) => state.cart.items);
+	const userId = useSelector((state) => state.user.userId);
 
 	const [itemToRemove, setItemToRemove] = useState({});
 	const [isModalVisible, setIsModalVisible] = useState(false);
@@ -26,8 +27,14 @@ export default function Cart() {
 		0
 	);
 
-	function handleCheckout() {
-		navigation.navigate("ShippingForm", { totalAmount });
+	async function handleCheckout() {
+		try {
+			const { totalAmount } = await getCartAPI(userId);
+			console.log(totalAmount);
+			navigation.navigate("ShippingForm", { totalAmount });
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
 	function handleShowModal() {
@@ -70,7 +77,7 @@ export default function Cart() {
 				<CustomTouchableOpacity
 					text={"Go Back"}
 					style={styles.goBackButton}
-					onPress={handleGoBack}
+					onPress={() => navigation.goBack()}
 					textStyle={styles.buttonText}
 				/>
 
