@@ -7,3 +7,4 @@ export { Product } from "./Product";
 export { SetQuantityModal } from "./SetQuantityModal";
 export { DrawerContent } from "./DrawerContent";
 export { ScreenHeader } from "./ScreenHeader";
+export { StripePayment } from "./StripePayment";

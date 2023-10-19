@@ -1,13 +1,14 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { useState } from "react";
 import { CustomTouchableOpacity } from "../components/customized-components/";
-import { OnlineBanking, CreditDebitCard } from "../components/";
+import { OnlineBanking, CreditDebitCard, StripePayment } from "../components/";
 import { useForm } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
 import RadioGroup from "react-native-radio-buttons-group";
 import { find } from "lodash";
 import { numberInAccount } from "../utils/";
 
+// Temporarily disabling this component in order to test the Stripe features
 export default function PaymentForm({ route }) {
 	const { totalAmount, shippingData } = route.params;
 

@@ -106,7 +106,7 @@ export default function OrderConfirmation({ route }) {
 					text={"Back to Shop"}
 					style={styles.backToShopButton}
 					textStyle={styles.backToShopText}
-					onPress={() => navigation.navigate("Shop")}
+					onPress={() => navigation.navigate("ProductList")}
 				/>
 			</View>
 		</ScrollView>

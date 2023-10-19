@@ -7,3 +7,4 @@ export { default as ShippingForm } from "./ShippingForm";
 export { default as Login } from "./Login";
 export { default as Signup } from "./Signup";
 export { default as API } from "./API";
+export { default as StripePayment } from "../components/StripePayment";

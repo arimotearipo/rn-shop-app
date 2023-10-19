@@ -15,7 +15,7 @@ import {
 	PaymentForm,
 	ShippingForm,
 } from "./screens";
-import { DrawerContent, ScreenHeader } from "./components";
+import { DrawerContent, ScreenHeader, StripePayment } from "./components";
 import store from "./rtk-store/store";
 
 const Stack = createStackNavigator();
@@ -23,7 +23,7 @@ const Stack = createStackNavigator();
 function StackNavigator() {
 	return (
 		<Stack.Navigator
-			initialRouteName="Login"
+			initialRouteName="StripePayment"
 			screenOptions={{
 				header: ({ navigation }) => <ScreenHeader navigation={navigation} />,
 			}}
@@ -44,6 +44,7 @@ function StackNavigator() {
 			<Stack.Screen name="ShippingForm" component={ShippingForm} />
 			<Stack.Screen name="PaymentForm" component={PaymentForm} />
 			<Stack.Screen name="OrderConfirmation" component={OrderConfirmation} />
+			<Stack.Screen name="StripePayment" component={StripePayment} />
 		</Stack.Navigator>
 	);
 }

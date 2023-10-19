@@ -29,9 +29,11 @@ export default function Cart() {
 
 	async function handleCheckout() {
 		try {
-			const { totalAmount } = await getCartAPI(userId);
-			console.log(totalAmount);
-			navigation.navigate("ShippingForm", { totalAmount });
+			const response = await getCartAPI(userId);
+
+			navigation.navigate("ShippingForm", {
+				totalAmount: response.data.totalAmount,
+			});
 		} catch (error) {
 			console.error(error);
 		}
