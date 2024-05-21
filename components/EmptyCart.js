@@ -12,7 +12,7 @@ export function EmptyCart() {
 				style={styles.backToShopButton}
 				text={"Back to Shop"}
 				textStyle={styles.backToShopText}
-				onPress={() => navigation.navigate("Shop")}
+				onPress={() => navigation.navigate("ProductList")}
 			/>
 		</View>
 	);

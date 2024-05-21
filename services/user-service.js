@@ -4,7 +4,7 @@ export async function signupAPI({ fullname, username, password }) {
 	return new Promise(async (resolve, reject) => {
 		try {
 			const response = await axios.post(
-				"http://10.0.2.2:3000/api/users/login",
+				"http://10.0.2.2:3000/api/users/signup",
 				{
 					fullname,
 					username,
